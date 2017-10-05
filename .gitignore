@@ -36,3 +36,5 @@ coverage.xml
 *.pot
 
 venv/
+
+*.sqlite3
