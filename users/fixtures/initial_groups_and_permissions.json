@@ -1,0 +1,71 @@
+[  
+   {  
+      "model":"auth.permission",
+      "pk":19,
+      "fields":{  
+         "name":"Can block user",
+         "content_type":2,
+         "codename":"block_user"
+      }
+   },
+   {  
+      "model":"auth.permission",
+      "pk":20,
+      "fields":{  
+         "name":"Can block community",
+         "content_type":2,
+         "codename":"block_community"
+      }
+   },
+   {  
+      "model":"auth.permission",
+      "pk":21,
+      "fields":{  
+         "name":"Can comment everywhere",
+         "content_type":2,
+         "codename":"comment_everywhere"
+      }
+   },
+   {  
+      "model":"auth.permission",
+      "pk":22,
+      "fields":{  
+         "name":"Can delete Posts",
+         "content_type":2,
+         "codename":"delete_posts"
+      }
+   },
+   {  
+      "model":"auth.permission",
+      "pk":23,
+      "fields":{  
+         "name":"Can delete comments",
+         "content_type":2,
+         "codename":"delete_comments"
+      }
+   },
+   {  
+      "model":"auth.group",
+      "pk":1,
+      "fields":{  
+         "name":"User",
+         "permissions":[  
+
+         ]
+      }
+   },
+   {  
+      "model":"auth.group",
+      "pk":2,
+      "fields":{  
+         "name":"Administrator",
+         "permissions":[  
+            20,
+            19,
+            21,
+            23,
+            22
+         ]
+      }
+   }
+]
