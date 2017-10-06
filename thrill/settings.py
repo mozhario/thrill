@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'users',
-    'chat',
-    'posts',
-    'comments',
-    'communities',
+    'apps.users',
+    'apps.chat',
+    'apps.posts',
+    'apps.comments',
+    'apps.communities',
 ]
 
 MIDDLEWARE = [
