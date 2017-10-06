@@ -127,5 +127,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+# Custom user model
 AUTH_USER_MODEL = 'users.User'
+
+# django-registration
+ACCOUNT_ACTIVATION_DAYS = 7
