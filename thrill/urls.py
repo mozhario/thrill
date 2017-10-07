@@ -30,4 +30,5 @@ urlpatterns = [
         name='registration_register',
     ),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^users/', include('apps.users.urls')),
 ]

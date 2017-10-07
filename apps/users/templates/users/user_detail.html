@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block "content" %}
+    
+    <div class="user-profile">
+        <h3 class="title full-name">
+            {{ user.first_name }}
+            {{ user.last_name }}
+        </h3>
+        <span class=" username">
+            @{{ user.username }}
+        </span>
+    </div>
+
+{% endblock %}
