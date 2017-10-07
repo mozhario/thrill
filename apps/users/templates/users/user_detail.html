@@ -3,13 +3,21 @@
 {% block "content" %}
     
     <div class="user-profile">
+        {% if user.profile_pic %}
+            <img class="avatar" src="{{user.profile_pic}}"/>
+        {% else %}
+            <img class="avatar" src="http://lorempixel.com/250/400/people/"/>
+        {% endif %}
         <h3 class="title full-name">
             {{ user.first_name }}
             {{ user.last_name }}
         </h3>
-        <span class=" username">
+        <p class=" username">
             @{{ user.username }}
-        </span>
+        </p>
+        <p class="birth-date">
+            Born: {{ user.birth_date }}
+        </p>
     </div>
 
 {% endblock %}
