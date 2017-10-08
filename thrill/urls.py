@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf.urls.static import static
+
 from registration.backends.hmac.views import RegistrationView
 from apps.users.forms import UserForm
+
+from . import settings
 
 
 urlpatterns = [
@@ -30,5 +34,12 @@ urlpatterns = [
         name='registration_register',
     ),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
+
     url(r'^users/', include('apps.users.urls')),
+
+    # static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
+    # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
+    # staticfiles_urlpatterns(),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
