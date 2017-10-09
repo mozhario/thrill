@@ -4,7 +4,7 @@
     
     <div class="user-profile">
         {% if user.profile_pic %}
-            <img class="avatar" src="{{user.profile_pic}}"/>
+            <img class="avatar" src="{{ user.profile_pic.url }}"/>
         {% else %}
             <img class="avatar" src="http://lorempixel.com/250/400/people/"/>
         {% endif %}

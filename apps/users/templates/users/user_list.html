@@ -6,7 +6,7 @@
         <div class="user-card">
             <div class="avatar">
                 {% if user.profile_pic %}
-                    <img class="avatar" src="{{user.profile_pic}}"/>
+                    <img class="avatar" src="{{ user.profile_pic.url }}"/>
                 {% else %}
                     <img class="avatar" src="http://lorempixel.com/100/100/people/"/>
                 {% endif %}
