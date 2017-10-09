@@ -18,6 +18,12 @@
         <p class="birth-date">
             Born: {{ user.birth_date }}
         </p>
+        
+        {% if request.user %}
+            {% if user.pk == request.user.pk %}
+                <a href="{% url 'user_edit' %}">Edit</a>
+            {% endif %}
+        {% endif %}
     </div>
 
 {% endblock %}
