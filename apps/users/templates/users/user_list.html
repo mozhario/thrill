@@ -5,18 +5,20 @@
     {% for user in users %}
         <div class="user-card">
             <div class="avatar">
-                {% if user.profile_pic %}
-                    <img class="avatar" src="{{ user.profile_pic.url }}"/>
-                {% else %}
-                    <img class="avatar" src="http://lorempixel.com/100/100/people/"/>
-                {% endif %}
+                <a href="{% url 'user_detail' user.username %}">
+                    {% if user.profile_pic %}
+                        <img class="avatar" src="{{ user.profile_pic.url }}"/>
+                    {% else %}
+                        <img class="avatar" src="http://lorempixel.com/100/100/people/"/>
+                    {% endif %}
+                </a>
             </div>
             <div class="full-name">
                 {{ user.first_name }}
                 {{ user.last_name }}
             </div>
             <div class="username">
-                @{{ user.username }}
+                <a href="{% url 'user_detail' user.username %}">@{{ user.username }}</a>
             </div>
             <div class="location">
                 {{ user.location }}
