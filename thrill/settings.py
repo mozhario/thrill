@@ -130,5 +130,10 @@ STATIC_URL = '/static/'
 # Custom user model
 AUTH_USER_MODEL = 'users.User'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # django-registration
 ACCOUNT_ACTIVATION_DAYS = 7
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+MEDIA_URL = '/media/'
