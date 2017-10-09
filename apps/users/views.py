@@ -69,6 +69,9 @@ class UserEditView(LoginRequiredMixin, UpdateView):
         user = self.request.user
         return user
 
-    # def form_valid(self, form):
 
-    #     return super(UserEditView, self).form_valid(form)
+class ProfileView(LoginRequiredMixin, View):
+    login_url = 'auth_login'
+
+    def get(self, request):
+        return redirect('user_detail', request.user.username)
