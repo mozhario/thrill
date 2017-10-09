@@ -1,10 +1,13 @@
 from functools import reduce
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
 from django.db.models import Q
+from registration.views import RegistrationView
+from django.contrib.auth.models import Group
 
 from .models import User
+from .forms import UserForm
 
 
 class UserDetail(DetailView):
@@ -37,3 +40,16 @@ class UserList(ListView):
             )
 
         return users
+
+
+class UserRegistrationView(RegistrationView):
+    form_class = UserForm
+
+    def register(self, form):
+        user = form.save()
+
+        group = Group.objects.get(name='User')
+        user.groups.add(group)
+        user.save()
+
+        return redirect('auth_profile')
