@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 
 from apps.users.views import UserRegistrationView
-from apps.users.forms import UserForm
+from apps.users.forms import UserRegistrationForm
 
 from . import settings
 
@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^accounts/register/$', UserRegistrationView.as_view(), name='registration_register'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
 
-    url(r'^users/', include('apps.users.urls')),
+    url(r'', include('apps.users.urls')),
 
     # static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),

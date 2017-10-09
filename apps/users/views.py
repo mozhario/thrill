@@ -1,13 +1,16 @@
 from functools import reduce
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, FormView, UpdateView
 from django.db.models import Q
 from registration.views import RegistrationView
 from django.contrib.auth.models import Group
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+
 
 from .models import User
-from .forms import UserForm
+from .forms import UserRegistrationForm, UserEditForm
 
 
 class UserDetail(DetailView):
@@ -43,7 +46,7 @@ class UserList(ListView):
 
 
 class UserRegistrationView(RegistrationView):
-    form_class = UserForm
+    form_class = UserRegistrationForm
 
     def register(self, form):
         user = form.save()
@@ -53,3 +56,19 @@ class UserRegistrationView(RegistrationView):
         user.save()
 
         return redirect('auth_profile')
+
+
+class UserEditView(LoginRequiredMixin, UpdateView):
+    model_class = User
+    form_class = UserEditForm
+    template_name = 'users/user_edit.html'
+    login_url = 'auth_login'
+    success_url = 'user_edit'
+
+    def get_object(self, *args, **kwargs):
+        user = self.request.user
+        return user
+
+    # def form_valid(self, form):
+
+    #     return super(UserEditView, self).form_valid(form)

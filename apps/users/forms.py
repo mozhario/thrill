@@ -1,13 +1,31 @@
 from datetime import datetime
 
-from registration.forms import RegistrationForm
+from django.forms import ModelForm
 from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.auth.admin import UserAdmin
+from registration.forms import RegistrationForm
 
 from .models import User
 
 
-class UserForm(RegistrationForm):
+class UserEditForm(ModelForm):
+    class Meta:
+        model = User
+        fields = (
+            'first_name',
+            'last_name',
+            'birth_date',
+            'profile_pic',
+            'email',
+            'location'
+        )
+        widgets = {
+            'birth_date': SelectDateWidget(years=range(datetime.today().year, 1900, -1))
+        }
+
+
+# TODO: Maybe inherit from UserEditForm?
+class UserRegistrationForm(RegistrationForm):
     '''
     User register form overriden to add some custom
     user model fields.
@@ -30,7 +48,6 @@ class UserForm(RegistrationForm):
 
 
 class CustomUserAdmin(UserAdmin):
-    # form = MyUserChangeForm
 
     fieldsets = UserAdmin.fieldsets + (
             (None, {'fields': ('profile_pic',)}),
