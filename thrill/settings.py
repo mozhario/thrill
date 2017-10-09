@@ -134,6 +134,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # django-registration
 ACCOUNT_ACTIVATION_DAYS = 7
+LOGIN_REDIRECT_URL = '/feed/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 MEDIA_URL = '/media/'
