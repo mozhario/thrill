@@ -15,8 +15,10 @@ class UserEditForm(ModelForm):
             'first_name',
             'last_name',
             'birth_date',
+            'bio',
             'profile_pic',
             'email',
+            'phone',
             'location'
         )
         widgets = {
@@ -24,7 +26,6 @@ class UserEditForm(ModelForm):
         }
 
 
-# TODO: Maybe inherit from UserEditForm?
 class UserRegistrationForm(RegistrationForm):
     '''
     User register form overriden to add some custom
