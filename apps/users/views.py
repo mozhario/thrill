@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 
 
-from .models import User
+from .models import User, UserSubscription
 from .forms import UserRegistrationForm, UserEditForm
 
 
@@ -68,6 +68,15 @@ class UserEditView(LoginRequiredMixin, UpdateView):
     def get_object(self, *args, **kwargs):
         user = self.request.user
         return user
+
+
+class SubscribeToUser(LoginRequiredMixin, View):
+    def get(self, request, **kwargs):
+        user_to_subscribe = User.objects.get(self.kwargs['user_id'])
+        user_to_subscribe.subscriptions.create(user_id=request.user.pk)
+        user_to_subscribe.save()
+        # TODO Json response
+        return redirect('user_detail', user_to_subscribe.pk)
 
 
 class ProfileView(LoginRequiredMixin, View):

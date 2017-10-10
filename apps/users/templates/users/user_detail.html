@@ -24,6 +24,25 @@
                 <a href="{% url 'user_edit' %}">Edit</a>
             {% endif %}
         {% endif %}
+
+        {% if request.user %}
+            {% if user.pk != request.user.pk %}
+                <a href="{% url 'user_subscribe' user.pk %}">Subscribe</a>
+            {% endif %}
+        {% endif %}
+
+        <hr>
+        <div class="board user-board">
+            <h3>{{ user.username }}'s board</h3>
+            {# TODO: Include some generic template here #}
+            <div class="posts-grid">
+                {% for post in user.userpost_set.all %}
+                    <div class="post-item">
+                        {{ post.title }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
 {% endblock %}

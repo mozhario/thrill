@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 
 
@@ -13,6 +13,7 @@ class User(AbstractUser):
     birth_date = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=12, blank=True)
     profile_pic = models.ImageField(blank=True)
+    subscriptions = GenericRelation('UserSubscription')
 
 
 class UserSubscription(models.Model):
