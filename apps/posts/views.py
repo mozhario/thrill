@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from django.views.generic import DetailView
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -24,6 +25,11 @@ class UserPostCreateView(PostCreateView):
         post.user = self.request.user
         post.save()
         return redirect('user_post_detail', post.pk)
+
+
+class UserPostList(ListView):
+    model = UserPost
+    context_object_name = "posts_list"
 
 
 class CommunityPostCreateView(PostCreateView):
