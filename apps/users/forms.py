@@ -51,5 +51,5 @@ class UserRegistrationForm(RegistrationForm):
 class CustomUserAdmin(UserAdmin):
 
     fieldsets = UserAdmin.fieldsets + (
-            (None, {'fields': ('profile_pic',)}),
+            (None, {'fields': ('profile_pic', 'birth_date', 'location', 'bio', 'phone')}),
     )
