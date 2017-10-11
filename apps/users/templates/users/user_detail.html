@@ -42,6 +42,12 @@
 
         {% if request.user %}
             {% if user.pk != request.user.pk %}
+
+                user.subscriptions.all: {{ request.user.subscriptions.all.query }}
+
+                {% for subscription in user.subscriptions.all %}
+                    {{ subscription.content_object.username }}
+                {% endfor %}
                 <a href="{% url 'user_subscribe' user.pk %}">Subscribe</a>
             {% endif %}
         {% endif %}
