@@ -15,6 +15,14 @@ class User(AbstractUser):
     profile_pic = models.ImageField(blank=True)
     subscriptions = GenericRelation('UserSubscription')
 
+    def subscribe(self, obj):
+        self.subscriptions.create(user_id=self.pk, content_object=obj)
+        return self
+
+    # TODO unsubscribe
+    def unsubscribe(self, obj):
+        pass
+
 
 class UserSubscription(models.Model):
 	'''

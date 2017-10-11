@@ -72,11 +72,12 @@ class UserEditView(LoginRequiredMixin, UpdateView):
 
 class SubscribeToUser(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        user_to_subscribe = User.objects.get(self.kwargs['user_id'])
-        user_to_subscribe.subscriptions.create(user_id=request.user.pk)
-        user_to_subscribe.save()
+        print(self.kwargs['user_id'])
+        user_to_subscribe = User.objects.get(id=self.kwargs['user_id'])
+        request.user.subscribe(user_to_subscribe)
+        request.user.save()
         # TODO Json response
-        return redirect('user_detail', user_to_subscribe.pk)
+        return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 class ProfileView(LoginRequiredMixin, View):
