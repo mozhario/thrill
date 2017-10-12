@@ -105,6 +105,7 @@ class ProfileView(LoginRequiredMixin, View):
 
 class UserPostCreateView(PostCreateView):
     model = UserPost
+    template_name = 'posts/post_form.html'
 
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -115,8 +116,10 @@ class UserPostCreateView(PostCreateView):
 
 class UserPostDetail(DetailView):
     model = UserPost
+    template_name = 'posts/post_detail.html'
 
 
 class UserPostList(ListView):
     model = UserPost
+    template_name = 'posts/post_list.html'
     context_object_name = "posts_list"
