@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 
+from apps.base.models import Post
+
 
 class UserManager(models.Manager):
     '''
@@ -54,10 +56,8 @@ class User(AbstractUser):
         self.subscriptions.create(user_id=self.pk, content_object=obj)
         return self
 
-    # TODO unsubscribe
     def unsubscribe(self, obj):
         subscription = UserSubscription.objects.filter(user=self, object_id=obj.id)
-        print(subscription)
         subscription.delete()
         return self
 
@@ -73,3 +73,6 @@ class UserSubscription(models.Model):
 	object_id = models.PositiveIntegerField()
 	content_object = GenericForeignKey('content_type', 'object_id')
 	
+
+class UserPost(Post):
+    user = models.ForeignKey(User)

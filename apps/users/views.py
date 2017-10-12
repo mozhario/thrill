@@ -10,9 +10,9 @@ from django.views import View
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
-
-from .models import User, UserSubscription
+from .models import User, UserSubscription, UserPost
 from .forms import UserRegistrationForm, UserEditForm
+from apps.base.views import PostCreateView
 
 
 class UserDetail(DetailView):
@@ -101,3 +101,22 @@ class ProfileView(LoginRequiredMixin, View):
 
     def get(self, request):
         return redirect('user_detail', request.user.username)
+
+
+class UserPostCreateView(PostCreateView):
+    model = UserPost
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.user = self.request.user
+        post.save()
+        return redirect('user_post_detail', post.pk)
+
+
+class UserPostDetail(DetailView):
+    model = UserPost
+
+
+class UserPostList(ListView):
+    model = UserPost
+    context_object_name = "posts_list"

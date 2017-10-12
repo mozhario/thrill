@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'apps.base',
     'apps.users',
     'apps.chat',
-    'apps.posts',
     'apps.comments',
     'apps.communities',
 ]

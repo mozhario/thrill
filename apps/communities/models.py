@@ -1,5 +1,6 @@
 from django.db import models
 from apps.base.models import Timestamps
+from apps.base.models import Post
 
 
 class Community(Timestamps):
@@ -7,3 +8,7 @@ class Community(Timestamps):
 	short_link = models.CharField(max_length=40, unique=True)
 	description = models.CharField(max_length=9999)
 	avatar_pic = models.ImageField(blank=True)
+
+
+class CommunityPost(Post):
+    community = models.ForeignKey(Community)
