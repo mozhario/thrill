@@ -43,12 +43,14 @@
         {% if request.user %}
             {% if user.pk != request.user.pk %}
 
-                user.subscriptions.all: {{ request.user.subscriptions.all.query }}
+                {{request.user.subscribed_to}}
 
-                {% for subscription in user.subscriptions.all %}
-                    {{ subscription.content_object.username }}
-                {% endfor %}
-                <a href="{% url 'user_subscribe' user.pk %}">Subscribe</a>
+                {% if user in request.user.subscribed_to %}
+                    <a href="{% url 'user_unsubscribe' user.pk %}">Unsubscribe</a>
+                {% else %}
+                    <a href="{% url 'user_subscribe' user.pk %}">Subscribe</a>
+                {% endif %}
+
             {% endif %}
         {% endif %}
 

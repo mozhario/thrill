@@ -56,7 +56,10 @@ class User(AbstractUser):
 
     # TODO unsubscribe
     def unsubscribe(self, obj):
-        pass
+        subscription = UserSubscription.objects.filter(user=self, object_id=obj.id)
+        print(subscription)
+        subscription.delete()
+        return self
 
 
 class UserSubscription(models.Model):

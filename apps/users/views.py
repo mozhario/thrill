@@ -86,6 +86,16 @@ class SubscribeToUser(LoginRequiredMixin, View):
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
+class UnsubscribeFromUser(LoginRequiredMixin, View):
+    def get(self, request, **kwargs):
+        print(self.kwargs['user_id'])
+        user_to_unsubscribe = User.objects.get(id=self.kwargs['user_id'])
+        request.user.unsubscribe(user_to_unsubscribe)
+        request.user.save()
+        # TODO Json response
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
 class ProfileView(LoginRequiredMixin, View):
     login_url = 'auth_login'
 
