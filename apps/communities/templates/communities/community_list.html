@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block "content" %}
+    
+    {% for community in communities %}
+        <div>
+            <div>{{ community.title }}</div>
+            <div>{{ community.description}}</div>
+            <hr>
+        </div>
+    {% endfor %}
+
+{% endblock %}
