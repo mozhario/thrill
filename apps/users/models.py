@@ -5,10 +5,22 @@ from django.contrib.contenttypes.models import ContentType
 
 
 class UserManager(models.Manager):
-    def _get_subscribers(self, obj):
+    '''
+    User model manager that adds subscribers to single objects
+    as well as objects in querysets
+
+    Usage:
+        user.subscribers - contains objects of users that subscribed to user
+        user.subscribed_to - contains objects of users that user is subscribed to
+    '''
+
+    # TODO refactor subscribers managing methods to return querysets instead of lists
+    @staticmethod
+    def _get_subscribers(obj):
         return [subscription.user for subscription in UserSubscription.objects.filter(object_id=obj.pk)]
 
-    def _get_subscribed_to(self, obj):
+    @staticmethod
+    def _get_subscribed_to(obj):
         return [subscription.content_object for subscription in UserSubscription.objects.filter(user_id=obj.pk)]
 
     def get_queryset(self, *args, **kwargs):
