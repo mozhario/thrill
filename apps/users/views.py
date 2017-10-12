@@ -7,6 +7,8 @@ from registration.views import RegistrationView
 from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 
 from .models import User, UserSubscription
@@ -17,8 +19,12 @@ class UserDetail(DetailView):
     model = User
 
     def get_object(self):
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        return user
+        try:
+            user = User.objects.get(username=self.kwargs['username'])
+            return user
+        except ObjectDoesNotExist:
+            raise Http404("We didn't found a person with username %s" % (self.kwargs['username']))
+
 
 
 class UserList(ListView):
