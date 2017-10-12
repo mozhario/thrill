@@ -57,13 +57,11 @@
         <hr>
         <div class="board user-board">
             <h3>{{ user.username }}'s board</h3>
-            {# TODO: Include some generic template here #}
+            
             <div class="posts-grid">
-                {% for post in user.userpost_set.all %}
-                    <div class="post-item">
-                        {{ post.title }}
-                    </div>
-                {% endfor %}
+                {% with posts_list=user.userpost_set.all %}
+                    {% include "posts/post_list.html" %}
+                {% endwith %}
             </div>
         </div>
     </div>
