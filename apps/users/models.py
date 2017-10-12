@@ -5,10 +5,24 @@ from django.contrib.contenttypes.models import ContentType
 
 
 class UserManager(models.Manager):
-    pass
-    # def get_queryset(self):
-    #     TODO: get subscriptions and subscribers
-    #     pass
+    def _get_subscribers(self, obj):
+        return [subscription.user for subscription in UserSubscription.objects.filter(object_id=obj.pk)]
+
+    def _get_subscribed_to(self, obj):
+        return [subscription.content_object for subscription in UserSubscription.objects.filter(user_id=obj.pk)]
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super(UserManager, self).get_queryset(*args, **kwargs)
+        for obj in queryset:
+            obj.subscribers = self._get_subscribers(obj)
+            obj.subscribed_to = self._get_subscribed_to(obj)
+        return queryset
+
+    def get(self, *args, **kwargs):
+        obj = super(UserManager, self).get(*args, **kwargs)
+        obj.subscribers = self._get_subscribers(obj)
+        obj.subscribed_to = self._get_subscribed_to(obj)
+        return obj
 
 
 class User(AbstractUser):
