@@ -1,10 +1,10 @@
-[  
-   {  
+[
+   {
       "model":"users.user",
       "pk":1,
-      "fields":{  
+      "fields":{
          "password":"pbkdf2_sha256$36000$H2KgLFZl8wGp$2GtQXt6Yd6E0W4DsDHRxxSODKCwOCrvtUjkFYZ1a49g=",
-         "last_login":"2017-10-11T08:18:19.936Z",
+         "last_login":"2017-10-12T16:45:39.399Z",
          "is_superuser":true,
          "username":"admin",
          "first_name":"",
@@ -18,18 +18,18 @@
          "birth_date":null,
          "phone":"",
          "profile_pic":"",
-         "groups":[  
+         "groups":[
 
          ],
-         "user_permissions":[  
+         "user_permissions":[
 
          ]
       }
    },
-   {  
+   {
       "model":"users.user",
       "pk":2,
-      "fields":{  
+      "fields":{
          "password":"pbkdf2_sha256$36000$0huLViPPOgPw$r0BjHKu5kAqUrJpbJM1Tj3Xd9mGk2jBGzLhzF0ccuPw=",
          "last_login":null,
          "is_superuser":false,
@@ -44,19 +44,19 @@
          "location":"Windhelm",
          "birth_date":"1974-10-10",
          "phone":"",
-         "profile_pic":"\u0423\u043b\u044c\u0444\u0440\u0438\u043a_\u043f\u043e\u0440\u0442\u0440\u0435\u0442_zTKyg6d.png",
-         "groups":[  
+         "profile_pic":"\u0423\u043b\u044c\u0444\u0440\u0438\u043a_\u043f\u043e\u0440\u0442\u0440\u0435\u0442.png",
+         "groups":[
             1
          ],
-         "user_permissions":[  
+         "user_permissions":[
 
          ]
       }
    },
-   {  
+   {
       "model":"users.user",
       "pk":3,
-      "fields":{  
+      "fields":{
          "password":"pbkdf2_sha256$36000$PpP7T12tbUE9$7iS/aeUoo+i8FzZ5cMQ6qkOs4mswJ382lxUdNE4InJg=",
          "last_login":null,
          "is_superuser":false,
@@ -72,18 +72,18 @@
          "birth_date":"1969-04-01",
          "phone":"",
          "profile_pic":"acbf920e6a1c2ce2f82209a56ca33046--the-elder-scrolls-artsy-fartsy.jpg",
-         "groups":[  
+         "groups":[
             1
          ],
-         "user_permissions":[  
+         "user_permissions":[
 
          ]
       }
    },
-   {  
+   {
       "model":"users.user",
       "pk":4,
-      "fields":{  
+      "fields":{
          "password":"pbkdf2_sha256$36000$iI2NovUXU4pC$LT20lp0VnV+h04tt2tDQiPo60U9PZVldJHfN+5GmtWM=",
          "last_login":null,
          "is_superuser":false,
@@ -99,18 +99,18 @@
          "birth_date":"2017-05-17",
          "phone":"",
          "profile_pic":"IyrJY8xP.png",
-         "groups":[  
+         "groups":[
             1
          ],
-         "user_permissions":[  
+         "user_permissions":[
 
          ]
       }
    },
-   {  
+   {
       "model":"users.user",
       "pk":5,
-      "fields":{  
+      "fields":{
          "password":"pbkdf2_sha256$36000$eJS1snH9KEyc$GtnNP0u4wnPLTHCV6bsREJWgc5pxXlNCYyTqNXHhavE=",
          "last_login":null,
          "is_superuser":false,
@@ -126,18 +126,18 @@
          "birth_date":null,
          "phone":"",
          "profile_pic":"c597973dfc41efb274c662d26ab3d4b8.jpg",
-         "groups":[  
+         "groups":[
             1
          ],
-         "user_permissions":[  
+         "user_permissions":[
 
          ]
       }
    },
-   {  
+   {
       "model":"users.user",
       "pk":6,
-      "fields":{  
+      "fields":{
          "password":"pbkdf2_sha256$36000$A0ktCy46Aqu0$dMlgt/gaNtk2PWVCPH47cIC0sRnd6Jw559/2ON7gWYc=",
          "last_login":null,
          "is_superuser":false,
@@ -153,18 +153,18 @@
          "birth_date":null,
          "phone":"",
          "profile_pic":"doctorwho_s05_e01_38__x-large.jpg",
-         "groups":[  
+         "groups":[
             1
          ],
-         "user_permissions":[  
+         "user_permissions":[
 
          ]
       }
    },
-   {  
+   {
       "model":"users.user",
       "pk":7,
-      "fields":{  
+      "fields":{
          "password":"pbkdf2_sha256$36000$iizVXfOCh0UF$IjPBkPe3gVAfq/awZI+zrB/2Z73WaoBxkKv4gk39yQc=",
          "last_login":null,
          "is_superuser":false,
@@ -180,10 +180,118 @@
          "birth_date":null,
          "phone":"",
          "profile_pic":"",
-         "groups":[  
+         "groups":[
             1
          ],
-         "user_permissions":[  
+         "user_permissions":[
+
+         ]
+      }
+   },
+   {
+      "model":"users.user",
+      "pk":8,
+      "fields":{
+         "password":"pbkdf2_sha256$36000$sxfbjmJUA439$kIZA5lL5I6qnyGEQfhery4r2dcZvRrbqKq4PGysZGGQ=",
+         "last_login":null,
+         "is_superuser":false,
+         "username":"rick",
+         "first_name":"Rick",
+         "last_name":"Sanchez",
+         "email":"rick.sanchez@uni.verse",
+         "is_staff":false,
+         "is_active":true,
+         "date_joined":"2017-10-12T16:47:06Z",
+         "bio":"Wubba lubba dub dub!\r\nIt's just Rick and Morty. Rick and Morty and their adventures, Morty.. RICK AND MORTY FOREVER AND FOREVER A HUNDRED YEARS Rick and Morty.. some...things.. Me and Rick and Morty runnin' around and... Rick and Morty time... a- all day long forever.. all a - a hundred days Rick and Morty! forever a hundred times.... OVER and over Rick and Morty... adventures dot com.. W W W dot at Rick and Morty dot com w..w..w... Rick and Morty adventures.. ah- hundred years..... every minute",
+         "location":"Somewhere in the multiuniverse",
+         "birth_date":null,
+         "phone":"",
+         "profile_pic":"Rick_Sanchez.png",
+         "groups":[
+            1
+         ],
+         "user_permissions":[
+
+         ]
+      }
+   },
+   {
+      "model":"users.user",
+      "pk":9,
+      "fields":{
+         "password":"pbkdf2_sha256$36000$7JnRBDHgbIC9$+Kgc1bSg1XieyUaYteOLj7oyKOWK2LAv7+dyl+PWlZw=",
+         "last_login":null,
+         "is_superuser":false,
+         "username":"roman",
+         "first_name":"Roman",
+         "last_name":"Bellic",
+         "email":"roman@lc.com",
+         "is_staff":false,
+         "is_active":true,
+         "date_joined":"2017-10-12T17:01:55Z",
+         "bio":"Ladieees... this is Roman Bellic...",
+         "location":"Liberty City",
+         "birth_date":null,
+         "phone":"",
+         "profile_pic":"roman.jpg",
+         "groups":[
+            1
+         ],
+         "user_permissions":[
+
+         ]
+      }
+   },
+   {
+      "model":"users.user",
+      "pk":10,
+      "fields":{
+         "password":"pbkdf2_sha256$36000$0lEpLKWC7Zzk$bVtis3ONdwzc2FY/ADxSyqr6gMV5BCvT+akOK0/VogM=",
+         "last_login":null,
+         "is_superuser":false,
+         "username":"alyx.vance",
+         "first_name":"Alyx",
+         "last_name":"Vance",
+         "email":"alyx.vance@city17.com",
+         "is_staff":false,
+         "is_active":true,
+         "date_joined":"2017-10-12T17:10:44Z",
+         "bio":"",
+         "location":"City 17",
+         "birth_date":null,
+         "phone":"",
+         "profile_pic":"-Alyx-Vance-alyx-vance-38503986-511-650.jpg",
+         "groups":[
+            1
+         ],
+         "user_permissions":[
+
+         ]
+      }
+   },
+   {
+      "model":"users.user",
+      "pk":11,
+      "fields":{
+         "password":"pbkdf2_sha256$36000$76Cgo1DBTCfO$iptmFLyc0ZNgDBWfZFq+YQcRB5vqTb1FLeXbjw++juU=",
+         "last_login":null,
+         "is_superuser":false,
+         "username":"jake",
+         "first_name":"Jake",
+         "last_name":"the Dog",
+         "email":"jake@adventure.time",
+         "is_staff":false,
+         "is_active":true,
+         "date_joined":"2017-10-12T17:20:37Z",
+         "bio":"",
+         "location":"Land of Ooo",
+         "birth_date":null,
+         "phone":"",
+         "profile_pic":"lkE60_f-thumbnail-100-0.jpg",
+         "groups":[
+            1
+         ],
+         "user_permissions":[
 
          ]
       }
