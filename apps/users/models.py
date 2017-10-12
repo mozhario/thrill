@@ -2,11 +2,12 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import UserManager as DefaultUserManager
 
 from apps.base.models import Post
 
 
-class UserManager(models.Manager):
+class UserManager(DefaultUserManager):
     '''
     User model manager that adds subscribers to single objects
     as well as objects in querysets
