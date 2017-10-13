@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseForbidden
 
-from apps.base.views import PostCreateView
+from apps.base.views import PostCreateView, CommunityAdminRequiredMixin
 from .models import Community, CommunityPost
 
 
@@ -41,7 +41,7 @@ class CommunityCreateView(LoginRequiredMixin, CreateView):
         return redirect('community_detail', community.pk)
 
 
-class CommunityPostCreateView(PostCreateView):
+class CommunityPostCreateView(CommunityAdminRequiredMixin, PostCreateView):
     # TODO refactoring for:
     # 1. getting community object by url param in more generic way
     # 2. checking if user is admin of community should be a mixin or something
@@ -57,16 +57,6 @@ class CommunityPostCreateView(PostCreateView):
             community = Community.objects.get(short_link=self.kwargs['key'])
 
         return community
-
-    def get(self, request, *args, **kwargs):
-        response = super(CommunityPostCreateView, self).get(request, *args, **kwargs)
-
-        community = self.get_object()
-
-        if community.admin != request.user:
-            return HttpResponseForbidden("You are not allowed to manage this community.")
-
-        return response
 
     def form_valid(self, form):
         post = form.save(commit=False)
