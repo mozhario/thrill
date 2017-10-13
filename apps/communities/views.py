@@ -13,17 +13,11 @@ class CommunityDetail(DetailView):
     model = Community
 
     def get_object(self):
-        short_link = self.kwargs.get('short_link', None)
-        pk = self.kwargs.get('pk', None)
-
-        if short_link:
-            community = Community.objects.get(short_link=short_link)
-            return community
-        elif pk:
-            community = Community.objects.get(pk=pk)
-            return community
-        else:
-            raise Http404("We didn't found such a community.")
+        try:
+            key = int(self.kwargs['key'])
+            return Community.objects.get(pk=key)
+        except ValueError:
+            return Community.objects.get(short_link=self.kwargs['key'])
 
 
 class CommunityList(ListView):
@@ -50,18 +44,19 @@ class CommunityCreateView(LoginRequiredMixin, CreateView):
 class CommunityPostCreateView(PostCreateView):
     # TODO refactoring for:
     # 1. getting community object by url param in more generic way
-    # 2. checking if user is admin of community should be a mixin or
+    # 2. checking if user is admin of community should be a mixin or something
+    
     model = CommunityPost
     template_name = 'posts/post_form.html'
 
     def get(self, request, *args, **kwargs):
         response = super(CommunityPostCreateView, self).get(request, *args, **kwargs)
-        short_link = self.kwargs.get('short_link', None)
-        pk = self.kwargs.get('pk', None)
-        if short_link:
-            community = Community.objects.get(short_link=short_link)
-        elif pk:
-            community = Community.objects.get(pk=pk)
+
+        try:
+            key = int(self.kwargs['key'])
+            community = Community.objects.get(pk=key)
+        except ValueError:
+            community = Community.objects.get(short_link=self.kwargs['key'])
 
         if community.admin != request.user:
             return HttpResponseForbidden("You are not allowed to manage this community.")
@@ -71,22 +66,18 @@ class CommunityPostCreateView(PostCreateView):
     def form_valid(self, form):
         post = form.save(commit=False)
 
-        short_link = self.kwargs.get('short_link', None)
-        pk = self.kwargs.get('pk', None)
-        if short_link:
-            community = Community.objects.get(short_link=short_link)
-        elif pk:
-            community = Community.objects.get(pk=pk)
-        else:
-            raise Http404("We didn't found such a community.")
+        try:
+            key = int(self.kwargs['key'])
+            community = Community.objects.get(pk=key)
+        except ValueError:
+            community = Community.objects.get(short_link=self.kwargs['key'])
 
         post.community = community
         post.save()
 
-        if short_link:   
-            return redirect('community_post_detail', community.short_link, post.pk)
-        else:
-            return redirect('community_post_detail', community.pk, post.pk)
+        community_key = community.short_link or community.pk
+  
+        return redirect('community_post_detail', community_key, post.pk)
     
 
 class CommunityPostDetail(DetailView):
