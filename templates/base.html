@@ -13,10 +13,14 @@
 </head>
 <body>
     <div class="page {% block 'page_class' %}{% endblock %}">
+
+        {% include "partials/header.html" %}
+
         <div class="main">
             {% block "content" %}
             {% endblock %}
         </div>
+
         <div class="sidebar">
             {% include "partials/sidebar.html" %}
         </div>
