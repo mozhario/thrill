@@ -45,18 +45,23 @@ class CommunityPostCreateView(PostCreateView):
     # TODO refactoring for:
     # 1. getting community object by url param in more generic way
     # 2. checking if user is admin of community should be a mixin or something
-    
+
     model = CommunityPost
     template_name = 'posts/post_form.html'
 
-    def get(self, request, *args, **kwargs):
-        response = super(CommunityPostCreateView, self).get(request, *args, **kwargs)
-
+    def get_object(self):
         try:
             key = int(self.kwargs['key'])
             community = Community.objects.get(pk=key)
         except ValueError:
             community = Community.objects.get(short_link=self.kwargs['key'])
+
+        return community
+
+    def get(self, request, *args, **kwargs):
+        response = super(CommunityPostCreateView, self).get(request, *args, **kwargs)
+
+        community = self.get_object()
 
         if community.admin != request.user:
             return HttpResponseForbidden("You are not allowed to manage this community.")
@@ -66,11 +71,7 @@ class CommunityPostCreateView(PostCreateView):
     def form_valid(self, form):
         post = form.save(commit=False)
 
-        try:
-            key = int(self.kwargs['key'])
-            community = Community.objects.get(pk=key)
-        except ValueError:
-            community = Community.objects.get(short_link=self.kwargs['key'])
+        community = self.get_object()
 
         post.community = community
         post.save()
