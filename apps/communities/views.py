@@ -50,12 +50,26 @@ class CommunityCreateView(LoginRequiredMixin, CreateView):
 class CommunityPostCreateView(PostCreateView):
     model = CommunityPost
     template_name = 'posts/post_form.html'
-    # TODO implement 
-    # def form_valid(self, form):
-    #     post = form.save(commit=False)
-    #     post.user = self.request.user # community here
-    #     post.save()
-    #     return redirect('user_post_detail', post.pk)
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+
+        short_link = self.kwargs.get('short_link', None)
+        pk = self.kwargs.get('pk', None)
+        if short_link:
+            community = Community.objects.get(short_link=short_link)
+        elif pk:
+            community = Community.objects.get(pk=pk)
+        else:
+            raise Http404("We didn't found such a community.")
+
+        post.community = community
+        post.save()
+
+        if short_link:   
+            return redirect('community_post_detail', community.short_link, post.pk)
+        else:
+            return redirect('community_post_detail', community.pk, post.pk)
     
 
 class CommunityPostDetail(DetailView):

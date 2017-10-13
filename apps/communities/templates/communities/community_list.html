@@ -4,7 +4,17 @@
     
     {% for community in communities %}
         <div>
-            <div>{{ community.title }}</div>
+            <img src="{{ community.avatar_pic }}" alt="">
+
+            {% if community.short_link %}
+                <a href="{% url 'community_detail' community.short_link %}">
+                    <div>{{ community.title }}</div>
+                </a>
+            {% else %}
+                <a href="{% url 'community_detail' community.pk %}">
+                    <div>{{ community.title }}</div>
+                </a>
+            {% endif %}
             <div>{{ community.description}}</div>
             <hr>
         </div>

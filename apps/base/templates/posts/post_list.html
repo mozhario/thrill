@@ -1,19 +1,5 @@
 {% extends "base.html" %}
 
 {% block "content" %}
-    <div class="posts-grid">
-        {% for post in posts_list %}
-            <div class="card post-list-item">
-                <h2 class="post-title"><a href="{% url 'user_post_detail' post.pk %}">{{ post.title }}</a></h2>
-                {% if userpost.thumbnail %}
-                    <img src="{{ post.thumbnail.url }}" alt="">
-                {% endif %}
-                {% if post.excerpt %}
-                    <div class="post-content">{{ post.excerpt }}</div>
-                {% else %}
-                    <div class="post-content">{{ post.content|truncatewords:15 }}...</div>
-                {% endif %}
-            </div>
-        {% endfor %}
-    </div>
+    {% include "posts/partials/post_list.html" %}
 {% endblock %}

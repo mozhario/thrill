@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
 {% block "content" %}
-    {{ community.title }}
+    <h3>{{ community.title }}</h3>
+    <div>{{ community.description }}</div>
+
+    <div class="board">
+        {% with posts_list=community.communitypost_set.all %}
+            {% include "posts/partials/post_list.html" %}
+        {% endwith %}
+    </div>
 {% endblock %}
