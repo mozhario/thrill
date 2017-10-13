@@ -60,7 +60,7 @@
             
             <div class="posts-grid">
                 {% with posts_list=user.userpost_set.all %}
-                    {% include "posts/post_list.html" %}
+                    {% include "posts/partials/post_list.html" %}
                 {% endwith %}
             </div>
         </div>
