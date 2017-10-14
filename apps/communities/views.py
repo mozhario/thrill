@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView
-from django.views.generic import ListView
+from django.views import View
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseForbidden
 
 from apps.base.views import PostCreateView, CommunityAdminRequiredMixin
+from apps.users.models import User
 from .models import Community, CommunityPost
 
 
@@ -41,10 +42,27 @@ class CommunityCreateView(LoginRequiredMixin, CreateView):
         return redirect('community_detail', community.pk)
 
 
+class SubscribeToCommunity(LoginRequiredMixin, View):
+    def get(self, request, **kwargs):
+        community_to_subscribe = Community.objects.get(id=self.kwargs['community_id'])
+        request.user.subscribe(community_to_subscribe)
+        request.user.save()
+        # TODO Json response
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+class UnsubscribeFromCommunity(LoginRequiredMixin, View):
+    def get(self, request, **kwargs):
+        community_to_unsubscribe = Community.objects.get(id=self.kwargs['community_id'])
+        request.user.unsubscribe(community_to_unsubscribe)
+        request.user.save()
+        # TODO Json response
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
 class CommunityPostCreateView(CommunityAdminRequiredMixin, PostCreateView):
     # TODO refactoring for:
     # 1. getting community object by url param in more generic way
-    # 2. checking if user is admin of community should be a mixin or something
 
     model = CommunityPost
     template_name = 'posts/post_form.html'

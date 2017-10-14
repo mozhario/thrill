@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
+
 from apps.base.models import Timestamps
 from apps.base.models import Post
-from apps.users.models import User
+from apps.users.models import User, UserSubscription
 
 
 class Community(Timestamps):
@@ -10,6 +12,8 @@ class Community(Timestamps):
     description = models.TextField(max_length=9999)
     avatar_pic = models.ImageField(blank=True)
     admin = models.ForeignKey(User)
+
+    subscriptions = GenericRelation(UserSubscription)
 
 
 class CommunityPost(Post):

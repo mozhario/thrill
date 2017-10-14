@@ -4,6 +4,21 @@
     <h3>{{ community.title }}</h3>
     <div>{{ community.description }}</div>
 
+    {% if request.user %}
+
+        {% if community.admin != request.user %}
+
+            {{request.user.subscribed_to}}
+
+            {% if community in request.user.subscribed_to %}
+                <a href="{% url 'community_unsubscribe' community.pk %}">Unsubscribe</a>
+            {% else %}
+                <a href="{% url 'community_subscribe' community.pk %}">Subscribe</a>
+            {% endif %}
+
+        {% endif %}
+    {% endif %}
+
     <div class="board">
         {% with posts_list=community.communitypost_set.all %}
             {% include "posts/partials/post_list.html" %}
