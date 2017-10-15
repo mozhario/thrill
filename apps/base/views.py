@@ -43,6 +43,9 @@ def community_admin_required(view_func):
 
 
 class CommunityAdminRequiredMixin():
+    '''
+    Adds a check if logged in user is admin of a given communiy
+    '''
     @method_decorator(community_admin_required)
     def dispatch(self, request, *args, **kwargs):
         return super(CommunityAdminRequiredMixin, self).dispatch(request, *args, **kwargs)
@@ -61,6 +64,9 @@ def post_author_required(view_func):
 
 
 class PostAuthorRequiredMixin():
+    '''
+    Adds a check if logged in user is author of a given post
+    '''
     @method_decorator(post_author_required)
     def dispatch(self, request, *args, **kwargs):
         return super(PostAuthorRequiredMixin, self).dispatch(request, *args, **kwargs)
