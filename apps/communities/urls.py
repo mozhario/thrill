@@ -14,5 +14,6 @@ urlpatterns = [
 
     url(r'^c/(?P<key>[\d|\w.@+-]+)/posts/create/$', views.CommunityPostCreateView.as_view(), name='community_post_create'),
     url(r'^c/(?P<key>[\d|\w.@+-]+)/posts/(?P<pk>\d+)/edit/$', views.CommunityPostEditView.as_view(), name='community_post_edit'),
+    url(r'^c/(?P<key>[\d|\w.@+-]+)/posts/(?P<pk>\d+)/delete/$', views.CommunityPostDeleteView.as_view(), name='community_post_delete'),
     url(r'^c/(?P<key>[\d|\w.@+-]+)/posts/(?P<pk>\d+)/$', views.CommunityPostDetail.as_view(), name='community_post_detail'),
 ]

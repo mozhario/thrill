@@ -4,6 +4,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseForbidden
+from django.urls import reverse_lazy
 
 from apps.base.views import PostCreateView, PostEditView, CommunityAdminRequiredMixin
 from apps.users.models import User
@@ -141,6 +142,25 @@ class CommunityPostEditView(CommunityAdminRequiredMixin, PostEditView):
         community_key = community.short_link or community.pk
   
         return redirect('community_post_detail', community_key, post.pk)
+
+
+class CommunityPostDeleteView(CommunityAdminRequiredMixin, LoginRequiredMixin, DeleteView):
+    model = CommunityPost
+    template_name = "posts/post_confirm_delete.html"
+
+    def get_community_object(self):
+        try:
+            key = int(self.kwargs['key'])
+            community = Community.objects.get(pk=key)
+        except ValueError:
+            community = Community.objects.get(short_link=self.kwargs['key'])
+
+        return community
+
+    def get_success_url(self):
+        community = self.get_community_object()
+        key = community.short_link or community.pk
+        return reverse_lazy( 'community_detail', kwargs={'key': key})
 
 
 class CommunityPostDetail(DetailView):
