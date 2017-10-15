@@ -1,4 +1,4 @@
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404, HttpResponseForbidden
@@ -8,6 +8,15 @@ from apps.communities.models import Community
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    fields = [
+        'title',
+        'content',
+        'excerpt',
+        'thumbnail'
+    ]
+
+
+class PostEditView(LoginRequiredMixin, UpdateView):
     fields = [
         'title',
         'content',

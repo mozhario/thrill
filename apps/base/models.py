@@ -10,7 +10,7 @@ class Timestamps(models.Model):
 
 
 class Post(Timestamps):
-	title = models.CharField(max_length=140)
+	title = models.CharField(max_length=140, blank=True)
 	content = models.TextField(max_length=9999)
 	excerpt = models.TextField(max_length=300, blank=True)
 	thumbnail = models.ImageField(blank=True)

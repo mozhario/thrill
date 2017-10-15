@@ -1,4 +1,6 @@
 from functools import reduce
+from itertools import chain
+from operator import attrgetter
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, FormView, UpdateView
@@ -12,7 +14,8 @@ from django.http import Http404
 
 from .models import User, UserSubscription, UserPost
 from .forms import UserRegistrationForm, UserEditForm
-from apps.base.views import PostCreateView
+from apps.base.views import PostCreateView, PostEditView
+from apps.communities.models import CommunityPost
 
 
 class UserDetail(DetailView):
@@ -78,7 +81,6 @@ class UserEditView(LoginRequiredMixin, UpdateView):
 
 class SubscribeToUser(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        print(self.kwargs['user_id'])
         user_to_subscribe = User.objects.get(id=self.kwargs['user_id'])
         request.user.subscribe(user_to_subscribe)
         request.user.save()
@@ -88,7 +90,6 @@ class SubscribeToUser(LoginRequiredMixin, View):
 
 class UnsubscribeFromUser(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        print(self.kwargs['user_id'])
         user_to_unsubscribe = User.objects.get(id=self.kwargs['user_id'])
         request.user.unsubscribe(user_to_unsubscribe)
         request.user.save()
@@ -114,6 +115,15 @@ class UserPostCreateView(PostCreateView):
         return redirect('user_post_detail', post.pk)
 
 
+class UserPostEditView(PostEditView):
+    model = UserPost
+    template_name = 'posts/post_form.html'
+
+    def form_valid(self, form):
+        post = form.save(commit=True)
+        return redirect('user_post_detail', post.pk)
+
+
 class UserPostDetail(DetailView):
     model = UserPost
     template_name = 'posts/post_detail.html'
@@ -123,3 +133,21 @@ class UserPostList(ListView):
     model = UserPost
     template_name = 'posts/post_list.html'
     context_object_name = "posts_list"
+
+
+# class UserFeed(LoginRequiredMixin, View):
+#     def get(self, request, *args, **kwargs):
+#         user = request.user
+#         # subscribed_to_users = filter(lambda x:  user.subscribed_to)
+        
+#         user_posts = UserPost.objects.filter(user__in=user.subscribed_to)
+#         community_posts = CommunityPost.objects.filter(community__in=user.subscribed_to)
+
+#         result_list = sorted(
+#             chain(user_posts, community_posts),
+#             key=attrgetter('created_at'),
+#             reverse=True)
+
+#         print(result_list)
+
+#         return render(request, 'posts/post_list.html', {'posts_list': result_list})

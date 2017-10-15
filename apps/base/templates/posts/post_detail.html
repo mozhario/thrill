@@ -10,5 +10,14 @@
             {% endif %}
             <div class="post-content">{{ post.content }}</div>
         </div>
+
+        {% if request.user %}
+            {% if post.user %}
+                {% if post.user == request.user %}
+                    <a href="{% url 'user_post_edit' post.pk %}">Edit</a>
+                {% endif %}
+            {% endif %}
+            {# TODO if community post #}
+        {% endif %}
     {% endwith %}
 {% endblock %}

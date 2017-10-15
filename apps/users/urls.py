@@ -12,7 +12,8 @@ urlpatterns = [
 
     url(r'^posts/create$', views.UserPostCreateView.as_view(), name='user_post_create'),
     url(r'^posts/(?P<pk>\d+)/$', views.UserPostDetail.as_view(), name='user_post_detail'),
+    url(r'^posts/(?P<pk>\d+)/edit/$', views.UserPostEditView.as_view(), name='user_post_edit'),
 
-    url(r'^news/$', views.UserPostList.as_view(), name='user_post_list'),
+    url(r'^feed/$', views.UserPostList.as_view(), name='user_feed'),
     # url(r'^settings/delete-account$', UserDeleteView.as_view(), name='user_settings_delete'),
 ]
