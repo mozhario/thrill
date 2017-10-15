@@ -14,7 +14,7 @@ from django.http import Http404
 
 from .models import User, UserSubscription, UserPost
 from .forms import UserRegistrationForm, UserEditForm
-from apps.base.views import PostCreateView, PostEditView
+from apps.base.views import PostCreateView, PostEditView, PostAuthorRequiredMixin
 from apps.communities.models import CommunityPost
 
 
@@ -115,7 +115,7 @@ class UserPostCreateView(PostCreateView):
         return redirect('user_post_detail', post.pk)
 
 
-class UserPostEditView(PostEditView):
+class UserPostEditView(PostAuthorRequiredMixin, PostEditView):
     model = UserPost
     template_name = 'posts/post_form.html'
 
@@ -124,7 +124,7 @@ class UserPostEditView(PostEditView):
         return redirect('user_post_detail', post.pk)
 
 
-class UserPostDeleteView(LoginRequiredMixin, DeleteView):
+class UserPostDeleteView(PostAuthorRequiredMixin, LoginRequiredMixin, DeleteView):
     model = UserPost
     template_name = "posts/post_confirm_delete.html"
     success_url = 'profile'

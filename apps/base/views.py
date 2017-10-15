@@ -5,6 +5,7 @@ from django.http import Http404, HttpResponseForbidden
 from django.utils.decorators import method_decorator
 
 from apps.communities.models import Community
+from apps.users.models import User, UserPost
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -45,3 +46,21 @@ class CommunityAdminRequiredMixin():
     @method_decorator(community_admin_required)
     def dispatch(self, request, *args, **kwargs):
         return super(CommunityAdminRequiredMixin, self).dispatch(request, *args, **kwargs)
+
+
+def post_author_required(view_func):
+    def _wrapped_view_func(request, *args, **kwargs): 
+        post = UserPost.objects.get(pk=kwargs['pk'])
+
+        if post.user != request.user:
+            return HttpResponseForbidden("You are not allowed to manage this post.")
+        else:
+            return view_func(request, *args, **kwargs) 
+  
+    return _wrapped_view_func
+
+
+class PostAuthorRequiredMixin():
+    @method_decorator(post_author_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(PostAuthorRequiredMixin, self).dispatch(request, *args, **kwargs)
