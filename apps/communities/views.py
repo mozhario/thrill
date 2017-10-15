@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseForbidden
 
@@ -39,6 +39,27 @@ class CommunityCreateView(LoginRequiredMixin, CreateView):
         community = form.save(commit=False)
         community.admin = self.request.user # community here
         community.save()
+        return redirect('community_detail', community.pk)
+
+
+class CommunityEditView(CommunityAdminRequiredMixin, LoginRequiredMixin, UpdateView):
+    model = Community
+    fields = [
+        'title',
+        'short_link',
+        'description',
+        'avatar_pic',
+    ]
+
+    def get_object(self):
+        try:
+            key = int(self.kwargs['key'])
+            return Community.objects.get(pk=key)
+        except ValueError:
+            return Community.objects.get(short_link=self.kwargs['key'])
+
+    def form_valid(self, form):
+        community = form.save(commit=True)
         return redirect('community_detail', community.pk)
 
 
