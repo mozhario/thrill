@@ -19,6 +19,7 @@
         {% else %}
 
             <a href="{% url 'community_edit' community.pk %}">Edit</a>
+            <a href="{% url 'community_delete' community.pk %}">Delete</a>
 
         {% endif %}
     {% endif %}

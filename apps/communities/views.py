@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseForbidden
 
@@ -61,6 +61,17 @@ class CommunityEditView(CommunityAdminRequiredMixin, LoginRequiredMixin, UpdateV
     def form_valid(self, form):
         community = form.save(commit=True)
         return redirect('community_detail', community.pk)
+
+
+class CommunityDeleteView(CommunityAdminRequiredMixin, LoginRequiredMixin, DeleteView):
+    model = Community
+
+    def get_object(self):
+        try:
+            key = int(self.kwargs['key'])
+            return Community.objects.get(pk=key)
+        except ValueError:
+            return Community.objects.get(short_link=self.kwargs['key'])
 
 
 class SubscribeToCommunity(LoginRequiredMixin, View):
