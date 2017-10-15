@@ -15,6 +15,7 @@
             {% if post.user %}
                 {% if post.user == request.user %}
                     <a href="{% url 'user_post_edit' post.pk %}">Edit</a>
+                    <a href="{% url 'user_post_delete' post.pk %}">Delete</a>
                 {% endif %}
             {% endif %}
             {# TODO if community post #}

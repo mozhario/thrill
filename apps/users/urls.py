@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^posts/create$', views.UserPostCreateView.as_view(), name='user_post_create'),
     url(r'^posts/(?P<pk>\d+)/$', views.UserPostDetail.as_view(), name='user_post_detail'),
     url(r'^posts/(?P<pk>\d+)/edit/$', views.UserPostEditView.as_view(), name='user_post_edit'),
+    url(r'^posts/(?P<pk>\d+)/delete/$', views.UserPostDeleteView.as_view(), name='user_post_delete'),
 
     url(r'^feed/$', views.UserPostList.as_view(), name='user_feed'),
     # url(r'^settings/delete-account$', UserDeleteView.as_view(), name='user_settings_delete'),

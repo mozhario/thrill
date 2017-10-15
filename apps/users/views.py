@@ -3,7 +3,7 @@ from itertools import chain
 from operator import attrgetter
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import DetailView, ListView, FormView, UpdateView
+from django.views.generic import DetailView, ListView, FormView, UpdateView, DeleteView
 from django.db.models import Q
 from registration.views import RegistrationView
 from django.contrib.auth.models import Group
@@ -122,6 +122,12 @@ class UserPostEditView(PostEditView):
     def form_valid(self, form):
         post = form.save(commit=True)
         return redirect('user_post_detail', post.pk)
+
+
+class UserPostDeleteView(LoginRequiredMixin, DeleteView):
+    model = UserPost
+    template_name = "posts/post_confirm_delete.html"
+    success_url = 'profile'
 
 
 class UserPostDetail(DetailView):
