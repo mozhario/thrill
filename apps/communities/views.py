@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseForbidden
 
-from apps.base.views import PostCreateView, CommunityAdminRequiredMixin
+from apps.base.views import PostCreateView, PostEditView, CommunityAdminRequiredMixin
 from apps.users.models import User
 from .models import Community, CommunityPost
 
@@ -97,9 +97,8 @@ class CommunityPostCreateView(CommunityAdminRequiredMixin, PostCreateView):
     # 1. getting community object by url param in more generic way
 
     model = CommunityPost
-    template_name = 'posts/post_form.html'
 
-    def get_object(self):
+    def get_community_object(self):
         try:
             key = int(self.kwargs['key'])
             community = Community.objects.get(pk=key)
@@ -111,7 +110,7 @@ class CommunityPostCreateView(CommunityAdminRequiredMixin, PostCreateView):
     def form_valid(self, form):
         post = form.save(commit=False)
 
-        community = self.get_object()
+        community = self.get_community_object()
 
         post.community = community
         post.save()
@@ -120,6 +119,29 @@ class CommunityPostCreateView(CommunityAdminRequiredMixin, PostCreateView):
   
         return redirect('community_post_detail', community_key, post.pk)
     
+
+class CommunityPostEditView(CommunityAdminRequiredMixin, PostEditView):
+    model = CommunityPost
+    template_name = 'posts/post_form.html'
+
+    def get_community_object(self):
+        try:
+            key = int(self.kwargs['key'])
+            community = Community.objects.get(pk=key)
+        except ValueError:
+            community = Community.objects.get(short_link=self.kwargs['key'])
+
+        return community
+
+
+    def form_valid(self, form):
+        post = form.save(commit=True)
+
+        community = self.get_community_object()
+        community_key = community.short_link or community.pk
+  
+        return redirect('community_post_detail', community_key, post.pk)
+
 
 class CommunityPostDetail(DetailView):
     model = CommunityPost

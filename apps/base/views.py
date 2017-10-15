@@ -9,6 +9,7 @@ from apps.users.models import User, UserPost
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'posts/post_form.html'
     fields = [
         'title',
         'content',
@@ -18,6 +19,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 
 class PostEditView(LoginRequiredMixin, UpdateView):
+    template_name = 'posts/post_form.html'
     fields = [
         'title',
         'content',

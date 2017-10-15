@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^communities/(?P<community_id>\d+)/unsubscribe/$', views.UnsubscribeFromCommunity.as_view(), name='community_unsubscribe'),
 
     url(r'^c/(?P<key>[\d|\w.@+-]+)/posts/create/$', views.CommunityPostCreateView.as_view(), name='community_post_create'),
+    url(r'^c/(?P<key>[\d|\w.@+-]+)/posts/(?P<pk>\d+)/edit/$', views.CommunityPostEditView.as_view(), name='community_post_edit'),
     url(r'^c/(?P<key>[\d|\w.@+-]+)/posts/(?P<pk>\d+)/$', views.CommunityPostDetail.as_view(), name='community_post_detail'),
 ]

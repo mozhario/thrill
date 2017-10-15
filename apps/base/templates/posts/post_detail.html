@@ -17,8 +17,15 @@
                     <a href="{% url 'user_post_edit' post.pk %}">Edit</a>
                     <a href="{% url 'user_post_delete' post.pk %}">Delete</a>
                 {% endif %}
+            {% else %}
+                {% if post.community.admin == request.user %}
+                    {% if post.community.short_link %}
+                        <a href="{% url 'community_post_edit' post.community.short_link post.pk %}">Edit</a>
+                    {% else %}
+                        <a href="{% url 'community_post_edit' post.community.pk post.pk %}">Edit</a>
+                    {% endif %}
+                {% endif %}
             {% endif %}
-            {# TODO if community post #}
         {% endif %}
     {% endwith %}
 {% endblock %}
