@@ -153,6 +153,7 @@ CACHES = {
     }
 }
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 if DEBUG:
     from .settings_dev import *
