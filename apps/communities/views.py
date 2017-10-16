@@ -10,6 +10,7 @@ from apps.base.views import PostCreateView, PostEditView, CommunityAdminRequired
 from apps.users.models import User
 from apps.users.services import UserCommunitySubscriptionManager
 from .models import Community, CommunityPost
+from .forms import CommunityForm
 
 
 class CommunityDetail(DetailView):
@@ -30,12 +31,7 @@ class CommunityList(ListView):
 
 class CommunityCreateView(LoginRequiredMixin, CreateView):
     model = Community
-    fields = [
-        'title',
-        'short_link',
-        'description',
-        'avatar_pic',
-    ]
+    form_class = CommunityForm
 
     def form_valid(self, form):
         community = form.save(commit=False)
@@ -46,12 +42,7 @@ class CommunityCreateView(LoginRequiredMixin, CreateView):
 
 class CommunityEditView(CommunityAdminRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Community
-    fields = [
-        'title',
-        'short_link',
-        'description',
-        'avatar_pic',
-    ]
+    form_class = CommunityForm
 
     def get_object(self):
         try:
