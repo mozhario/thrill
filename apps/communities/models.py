@@ -8,7 +8,7 @@ from apps.users.models import User, UserSubscription
 
 class Community(Timestamps):
     title = models.CharField(max_length=140)
-    short_link = models.CharField(max_length=40, unique=True, null=True, blank=True) # TODO validate as username (maybe property)
+    short_link = models.CharField(max_length=40, null=True, blank=True) # TODO validate as username (maybe property)
     description = models.TextField(max_length=9999)
     avatar_pic = models.ImageField(blank=True)
     admin = models.ForeignKey(User)
