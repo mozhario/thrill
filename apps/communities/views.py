@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 
 from apps.base.views import PostCreateView, PostEditView, CommunityAdminRequiredMixin
 from apps.users.models import User
+from apps.users.services import UserCommunitySubscriptionManager
 from .models import Community, CommunityPost
 
 
@@ -78,8 +79,7 @@ class CommunityDeleteView(CommunityAdminRequiredMixin, LoginRequiredMixin, Delet
 class SubscribeToCommunity(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         community_to_subscribe = Community.objects.get(id=self.kwargs['community_id'])
-        request.user.subscribe(community_to_subscribe)
-        request.user.save()
+        UserCommunitySubscriptionManager.subscribe(request.user, community_to_subscribe)
         # TODO Json response
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
@@ -87,8 +87,7 @@ class SubscribeToCommunity(LoginRequiredMixin, View):
 class UnsubscribeFromCommunity(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         community_to_unsubscribe = Community.objects.get(id=self.kwargs['community_id'])
-        request.user.unsubscribe(community_to_unsubscribe)
-        request.user.save()
+        UserCommunitySubscriptionManager.unsubscribe(request.user, community_to_unsubscribe)
         # TODO Json response
         return redirect(request.META.get('HTTP_REFERER', '/'))
 

@@ -14,6 +14,7 @@ from django.http import Http404
 
 from .models import User, UserSubscription, UserPost
 from .forms import UserRegistrationForm, UserEditForm
+from .services import UserUserSubscriptionManager
 from apps.base.views import PostCreateView, PostEditView, PostAuthorRequiredMixin
 from apps.communities.models import CommunityPost
 
@@ -82,8 +83,7 @@ class UserEditView(LoginRequiredMixin, UpdateView):
 class SubscribeToUser(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         user_to_subscribe = User.objects.get(id=self.kwargs['user_id'])
-        request.user.subscribe(user_to_subscribe)
-        request.user.save()
+        UserUserSubscriptionManager.subscribe(request.user, user_to_subscribe)
         # TODO Json response
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
@@ -91,8 +91,7 @@ class SubscribeToUser(LoginRequiredMixin, View):
 class UnsubscribeFromUser(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         user_to_unsubscribe = User.objects.get(id=self.kwargs['user_id'])
-        request.user.unsubscribe(user_to_unsubscribe)
-        request.user.save()
+        UserUserSubscriptionManager.unsubscribe(request.user, user_to_unsubscribe)
         # TODO Json response
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
