@@ -38,12 +38,10 @@
         
         {% if request.user %}
             {% if user.pk == request.user.pk %}
+                
                 <a href="{% url 'user_edit' %}">Edit</a>
-            {% endif %}
-        {% endif %}
-
-        {% if request.user %}
-            {% if user.pk != request.user.pk %}
+            
+            {% else %}
 
                 {{request.user.subscribed_to}}
 
