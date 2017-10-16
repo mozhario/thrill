@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import UserManager as DefaultUserManager
+from django.core.cache import cache
 
 from apps.base.models import Post
 
@@ -20,11 +21,25 @@ class UserManager(DefaultUserManager):
     # TODO refactor subscribers managing methods to return querysets instead of lists
     @staticmethod
     def _get_subscribers(obj):
-        return [subscription.user for subscription in UserSubscription.objects.filter(object_id=obj.pk)]
+        cache_key = 'user_{id}_subscribers'.format(id=obj.pk)
+        subscribers = cache.get(cache_key, None)
+        
+        if subscribers is None:
+            subscribers = [subscription.user for subscription in UserSubscription.objects.filter(object_id=obj.pk)]
+            cache.set(cache_key, subscribers, 60 * 60)
+
+        return subscribers
 
     @staticmethod
     def _get_subscribed_to(obj):
-        return [subscription.content_object for subscription in UserSubscription.objects.filter(user_id=obj.pk)]
+        cache_key = 'user_{id}_subscribed_to'.format(id=obj.pk)
+        subscribed_to = cache.get(cache_key, None)
+
+        if subscribed_to is None:
+            subscribed_to = [subscription.content_object for subscription in UserSubscription.objects.filter(user_id=obj.pk)]
+            cache.set(cache_key, subscribed_to, 60 * 60)
+
+        return subscribed_to
 
     def get_queryset(self, *args, **kwargs):
         queryset = super(UserManager, self).get_queryset(*args, **kwargs)
@@ -52,15 +67,6 @@ class User(AbstractUser):
     subscriptions = GenericRelation('UserSubscription')
 
     objects = UserManager()
-
-    def subscribe(self, obj):
-        self.subscriptions.create(user_id=self.pk, content_object=obj)
-        return self
-
-    def unsubscribe(self, obj):
-        subscription = UserSubscription.objects.filter(user=self, object_id=obj.id)
-        subscription.delete()
-        return self
 
 
 class UserSubscription(models.Model):
