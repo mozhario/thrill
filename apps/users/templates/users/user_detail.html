@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block "content" %}
     
     <div class="user-profile">
         {% if user.profile_pic %}
             <img class="avatar" src="{{ user.profile_pic.url }}"/>
         {% else %}
-            <img class="avatar" src="http://lorempixel.com/250/400/people/"/>
+            <img class="avatar" src="{% static 'img/placeholder-image.png' %}"/>
         {% endif %}
         <h3 class="title full-name">
             {{ user.first_name }}

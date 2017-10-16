@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block "content" %}
 
 <div class="users">
@@ -12,7 +14,7 @@
                         {% if user.profile_pic %}
                             <img class="avatar" src="{{ user.profile_pic.url }}"/>
                         {% else %}
-                            <img class="avatar" src="http://lorempixel.com/120/120/people/"/>
+                            <img class="avatar" src="{% static 'img/placeholder-image.png' %}"/>
                         {% endif %}
                     </a>
                 </div>
