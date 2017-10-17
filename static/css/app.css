@@ -174,7 +174,7 @@ img {
 }
 
 
-.user-details {
+.left-column {
     width: 300px;
     float: left;
     position: fixed;
@@ -190,7 +190,7 @@ img {
 
 
 
-.user-page-content {   
+.left-column + .page-content {   
     margin-left: 300px;
     padding: 10px;
 }
@@ -226,7 +226,7 @@ img {
 }
 
 
-.user-board .post-list-item {
+.left-column + .page-content .post-list-item {
     width: 50%;
     float: left;
     padding: 0 5px;

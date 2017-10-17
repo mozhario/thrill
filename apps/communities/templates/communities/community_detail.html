@@ -1,32 +1,40 @@
 {% extends "base.html" %}
 
 {% block "content" %}
-    <h3>{{ community.title }}</h3>
-    <div>{{ community.description }}</div>
+    
+    <div class="left-column community-details">
+        <div class="section">
 
-    {% if request.user %}
+            {% if request.user %}
 
-        {% if community.admin != request.user %}
+                {% if community.admin != request.user %}
 
-            {{request.user.subscribed_to}}
+                    {{request.user.subscribed_to}}
 
-            {% if community in request.user.subscribed_to %}
-                <a href="{% url 'community_unsubscribe' community.pk %}">Unsubscribe</a>
-            {% else %}
-                <a href="{% url 'community_subscribe' community.pk %}">Subscribe</a>
+                    {% if community in request.user.subscribed_to %}
+                        <a href="{% url 'community_unsubscribe' community.pk %}">Unsubscribe</a>
+                    {% else %}
+                        <a href="{% url 'community_subscribe' community.pk %}">Subscribe</a>
+                    {% endif %}
+
+                {% else %}
+
+                    <a href="{% url 'community_edit' community.pk %}">Edit</a>
+                    <a href="{% url 'community_delete' community.pk %}">Delete</a>
+
+                {% endif %}
             {% endif %}
-
-        {% else %}
-
-            <a href="{% url 'community_edit' community.pk %}">Edit</a>
-            <a href="{% url 'community_delete' community.pk %}">Delete</a>
-
-        {% endif %}
-    {% endif %}
-
-    <div class="board">
-        {% with posts_list=community.communitypost_set.all %}
-            {% include "posts/partials/post_list.html" %}
-        {% endwith %}
+        </div>
+    </div>
+    
+    <div class="page-content">
+        
+        <h3>{{ community.title }}</h3>
+        <div>{{ community.description }}</div>
+        <div class="board">
+            {% with posts_list=community.communitypost_set.all %}
+                {% include "posts/partials/post_list.html" %}
+            {% endwith %}
+        </div>
     </div>
 {% endblock %}
