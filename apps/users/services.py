@@ -1,27 +1,18 @@
 from .models import UserSubscription
 from django.core.cache import cache
+from . import tasks
+
 
 
 class BaseUserSubscriptionManager():
     @staticmethod
     def _update_user_subscribed_to_cache(user):
-        user_subscribed_to = [subscription.content_object for subscription 
-                                in UserSubscription.objects.filter(user_id=user.pk)] 
-        
-        cache.set(
-            'user_{id}_subscribed_to'.format(id=user.pk),
-            user_subscribed_to
-        )
+        tasks.update_user_subscribed_to_cache.delay(user.pk)
 
     @staticmethod
     def _update_user_subscribers_cache(user):
-        second_user_subscribers = [subscription.user for subscription 
-                                    in UserSubscription.objects.filter(object_id=user.pk)]
-
-        cache.set(
-            'user_{id}_subscribers'.format(id=user.pk), 
-            second_user_subscribers
-        )
+        tasks.update_user_subscribers_cache.delay(user.pk)
+        
 
 
 class UserUserSubscriptionManager(BaseUserSubscriptionManager):
