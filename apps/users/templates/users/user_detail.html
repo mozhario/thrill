@@ -5,65 +5,86 @@
 {% block "content" %}
     
     <div class="user-profile">
-        {% if user.profile_pic %}
-            <img class="avatar" src="{{ user.profile_pic.url }}"/>
-        {% else %}
-            <img class="avatar" src="{% static 'img/placeholder-image.png' %}"/>
-        {% endif %}
-        <h3 class="title full-name">
-            {{ user.first_name }}
-            {{ user.last_name }}
-        </h3>
-        <p class=" username">
-            @{{ user.username }}
-        </p>
-        
-        {% if user.birth_date %}
-            <p class="birth-date">
-                Born: {{ user.birth_date }}
-            </p>
-        {% endif %}
-        
-        {% if user.location %}
-            <p class="location">
-                Location: {{ user.location }}
-            </p>
-        {% endif %}
-        
-        {% if user.bio %}
-            <p class="bio">
-                {{ user.bio }}
-            </p>
-        {% endif %}
-        
-        {% if request.user %}
-            {% if user.pk == request.user.pk %}
-                
-                <a href="{% url 'user_edit' %}">Edit</a>
-            
+        <div class="user-details">
+            {% if user.profile_pic %}
+                <img class="avatar" src="{{ user.profile_pic.url }}"/>
             {% else %}
-
-                {{request.user.subscribed_to}}
-
-                {% if user in request.user.subscribed_to %}
-                    <a href="{% url 'user_unsubscribe' user.pk %}">Unsubscribe</a>
-                {% else %}
-                    <a href="{% url 'user_subscribe' user.pk %}">Subscribe</a>
+                <img class="avatar" src="{% static 'img/placeholder-image.png' %}"/>
+            {% endif %}
+            <div class="user-info-card">
+                <p class=" username">
+                    @{{ user.username }}
+                </p>
+                
+                {% if user.birth_date %}
+                    <p class="birth-date">
+                        Born: {{ user.birth_date }}
+                    </p>
+                {% endif %}
+                
+                {% if user.location %}
+                    <p class="location">
+                        Location: {{ user.location }}
+                    </p>
                 {% endif %}
 
-            {% endif %}
-        {% endif %}
-
-        <hr>
-        <div class="board user-board">
-            <h3>{{ user.username }}'s board</h3>
             
-            <div class="posts-grid">
-                {% with posts_list=user.userpost_set.all %}
-                    {% include "posts/partials/post_list.html" %}
-                {% endwith %}
+                {% if request.user %}
+                    {% if user.pk == request.user.pk %}
+                        
+                        <a href="{% url 'user_edit' %}">Edit</a>
+                    
+                    {% else %}
+
+                        {{request.user.subscribed_to}}
+
+                        {% if user in request.user.subscribed_to %}
+                            <a href="{% url 'user_unsubscribe' user.pk %}">Unsubscribe</a>
+                        {% else %}
+                            <a href="{% url 'user_subscribe' user.pk %}">Subscribe</a>
+                        {% endif %}
+
+                    {% endif %}
+                {% endif %}
+            </div> 
+        </div>
+
+        <div class="user-page-content">
+
+                <h3 class="full-name">
+                    {{ user.first_name }}
+                    {{ user.last_name }}
+                </h3>
+                
+                
+                {% if user.bio %}
+                    <p class="bio">
+                        {{ user.bio }}
+                    </p>
+                {% endif %}
+
+            <ul class="user-nav">
+                <li class="user-nav-item">
+                    <a href="#">Board</a>
+                </li>
+                <li class="user-nav-item">
+                    <a href="#">Subscribers</a>
+                </li>
+                <li class="user-nav-item">
+                    <a href="#">Subscribed</a>
+                </li>
+            </ul>
+            <div class="board user-board">
+                <h3>{{ user.username }}'s board</h3>
+
+                <div class="posts-grid">
+                    {% with posts_list=user.userpost_set.all %}
+                        {% include "posts/partials/post_list.html" %}
+                    {% endwith %}
+                </div>
             </div>
         </div>
+
     </div>
 
 {% endblock %}

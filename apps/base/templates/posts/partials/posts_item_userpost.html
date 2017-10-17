@@ -1,11 +1,17 @@
-<div class="card post-list-item">
-    <h2 class="post-title"><a href="{% url 'user_post_detail' post.pk %}">{{ post.title }}</a></h2>
-    {% if userpost.thumbnail %}
-        <img src="{{ post.thumbnail.url }}" alt="">
-    {% endif %}
-    {% if post.excerpt %}
-        <div class="post-content">{{ post.excerpt }}</div>
-    {% else %}
-        <div class="post-content">{{ post.content|truncatewords:15 }}...</div>
-    {% endif %}
+<div class="post-list-item">
+    <div class="card card-vertical">
+        {% if userpost.thumbnail %}
+            <img src="{{ post.thumbnail.url }}" alt="">
+        {% endif %}
+        <div class="card-content">
+            <h4 class="post-title"><a href="{% url 'user_post_detail' post.pk %}">{{ post.title }}</a></h4>
+            {% if post.excerpt %}
+                <div class="post-content">{{ post.excerpt }}</div>
+            {% else %}
+                <div class="post-content">{{ post.content|truncatewords:15 }}...</div>
+            {% endif %}
+
+            <a href="{% url 'user_post_detail' post.pk %}">more...</a>
+        </div>
+    </div>
 </div>

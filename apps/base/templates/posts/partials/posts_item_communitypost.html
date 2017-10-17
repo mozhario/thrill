@@ -1,16 +1,28 @@
-<div class="card post-list-item">
-    {% if post.community.short_link %}
-        <h2 class="post-title"><a href="{% url 'community_post_detail' post.community.short_link post.pk %}">{{ post.title }}</a></h2>
-    {% else %}
-        <h2 class="post-title"><a href="{% url 'community_post_detail' post.community.pk post.pk %}">{{ post.title }}</a></h2>
-    {% endif %}
+<div class="post-list-item">
+    <div class="card card-vertical">
+        {% if post.thumbnail %}
+            <img src="{{ post.thumbnail.url }}" alt="">
+        {% endif %}
+        
+        <div class="card-content">
+            {% if post.community.short_link %}
+                <h4 class="post-title"><a href="{% url 'community_post_detail' post.community.short_link post.pk %}">{{ post.title }}</a></h4>
+            {% else %}
+                <h4 class="post-title"><a href="{% url 'community_post_detail' post.community.pk post.pk %}">{{ post.title }}</a></h4>
+            {% endif %}
 
-    {% if userpost.thumbnail %}
-        <img src="{{ post.thumbnail.url }}" alt="">
-    {% endif %}
-    {% if post.excerpt %}
-        <div class="post-content">{{ post.excerpt }}</div>
-    {% else %}
-        <div class="post-content">{{ post.content|truncatewords:15 }}...</div>
-    {% endif %}
+            
+            {% if post.excerpt %}
+                <div class="post-content">{{ post.excerpt }}</div>
+            {% else %}
+                <div class="post-content">{{ post.content|truncatewords:15 }}...</div>
+            {% endif %}
+
+            {% if post.community.short_link %}
+                <a href="{% url 'community_post_detail' post.community.short_link post.pk %}">more...</a>
+            {% else %}
+                <a href="{% url 'community_post_detail' post.community.pk post.pk %}">more...</a>
+            {% endif %}
+        </div>
+    </div>
 </div>

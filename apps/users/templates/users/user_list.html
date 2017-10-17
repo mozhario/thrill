@@ -8,7 +8,7 @@
 
     {% for user in users %}
         <div class="users-item">
-            <div class="card user-card">
+            <div class="card card-horizontal user-card">
                 <div class="card-thumbnail user-avatar">
                     <a href="{% url 'user_detail' user.username %}">
                         {% if user.profile_pic %}
