@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+ 
+    'actstream'
 
     'apps.base',
     'apps.users',
@@ -44,6 +46,8 @@ INSTALLED_APPS = [
     'apps.comments',
     'apps.communities',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
