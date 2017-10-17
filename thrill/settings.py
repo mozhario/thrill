@@ -155,5 +155,7 @@ CACHES = {
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
+# CELERY_IMPORTS = ("tasks", )
+
 if DEBUG:
     from .settings_dev import *
