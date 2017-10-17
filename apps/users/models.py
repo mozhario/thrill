@@ -41,13 +41,6 @@ class UserManager(DefaultUserManager):
 
         return subscribed_to
 
-    def get_queryset(self, *args, **kwargs):
-        queryset = super(UserManager, self).get_queryset(*args, **kwargs)
-        for obj in queryset:
-            obj.subscribers = self._get_subscribers(obj)
-            obj.subscribed_to = self._get_subscribed_to(obj)
-        return queryset
-
     def get(self, *args, **kwargs):
         obj = super(UserManager, self).get(*args, **kwargs)
         obj.subscribers = self._get_subscribers(obj)
