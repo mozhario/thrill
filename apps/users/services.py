@@ -1,5 +1,7 @@
 from .models import UserSubscription
 from django.core.cache import cache
+from actstream.actions import follow, unfollow
+
 from . import tasks
 
 
@@ -28,6 +30,7 @@ class UserUserSubscriptionManager(BaseUserSubscriptionManager):
         user.subscriptions.create(user_id=user.pk, content_object=user_to_subscribe)
         UserUserSubscriptionManager._update_user_subscribed_to_cache(user)
         UserUserSubscriptionManager._update_user_subscribers_cache(user_to_subscribe)
+        follow(user, user_to_subscribe)
 
     @staticmethod
     def unsubscribe(user, user_to_unsubscribe):
@@ -39,6 +42,7 @@ class UserUserSubscriptionManager(BaseUserSubscriptionManager):
         subscription.delete()
         UserUserSubscriptionManager._update_user_subscribed_to_cache(user)
         UserUserSubscriptionManager._update_user_subscribers_cache(user_to_unsubscribe)
+        unfollow(user, user_to_unsubscribe)
 
 
 class UserCommunitySubscriptionManager(BaseUserSubscriptionManager):
@@ -53,6 +57,7 @@ class UserCommunitySubscriptionManager(BaseUserSubscriptionManager):
         '''
         user.subscriptions.create(user_id=user.pk, content_object=community_to_subscribe)
         UserUserSubscriptionManager._update_user_subscribed_to_cache(user)
+        follow(user, community_to_subscribe)
 
     @staticmethod
     def unsubscribe(user, community_to_unsubscribe):
@@ -63,3 +68,4 @@ class UserCommunitySubscriptionManager(BaseUserSubscriptionManager):
         subscription = UserSubscription.objects.filter(user=user, object_id=community_to_unsubscribe.id)
         subscription.delete()
         UserUserSubscriptionManager._update_user_subscribed_to_cache(user)
+        unfollow(user, community_to_unsubscribe)
