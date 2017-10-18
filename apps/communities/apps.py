@@ -9,4 +9,4 @@ class CommunitiesConfig(AppConfig):
         registry.register(self.get_model('Community'))
         registry.register(self.get_model('CommunityPost'))
 
-        import apps.users.signals.handlers
+        import apps.communities.signals.handlers
