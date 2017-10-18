@@ -1,8 +1,22 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
+{% block "head" %}
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/simplemde.min.css' %}" />
+    <script src="{% static 'posts/js/simplemde.min.js' %}" ></script>
+{% endblock %}
+
 {% block "content" %}
     <form action="" method="post">{% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Save" />
     </form>
+{% endblock %}
+
+
+{% block "after_body" %}
+    <script>
+        var simplemde = new SimpleMDE();
+    </script>
 {% endblock %}
