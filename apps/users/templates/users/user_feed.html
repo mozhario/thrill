@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block "content" %}
+    {{follows}}
+    {{stream}}
+    {% with posts_list=stream %}
+        {% include 'posts/partials/post_list.html' %}
+    {% endwith %}
+{% endblock %}

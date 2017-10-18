@@ -15,6 +15,6 @@ urlpatterns = [
     url(r'^posts/(?P<pk>\d+)/edit/$', views.UserPostEditView.as_view(), name='user_post_edit'),
     url(r'^posts/(?P<pk>\d+)/delete/$', views.UserPostDeleteView.as_view(), name='user_post_delete'),
 
-    url(r'^feed/$', views.UserPostList.as_view(), name='user_feed'),
+    url(r'^feed/$', views.UserFeed.as_view(), name='user_feed'),
     # url(r'^settings/delete-account$', UserDeleteView.as_view(), name='user_settings_delete'),
 ]

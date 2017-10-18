@@ -12,6 +12,8 @@ from django.views import View
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
+from actstream.models import user_stream, following
+
 from .models import User, UserSubscription, UserPost
 from .forms import UserRegistrationForm, UserEditForm
 from .services import UserUserSubscriptionManager
@@ -138,6 +140,16 @@ class UserPostList(ListView):
     model = UserPost
     template_name = 'posts/post_list.html'
     context_object_name = "posts_list"
+
+
+class UserFeed(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        stream = [action.target for action in user_stream(request.user)]
+        follows = following(request.user)
+        return render(request, 'users/user_feed.html', context={
+            'stream': stream,
+            'follows': follows
+        })
 
 
 # class UserFeed(LoginRequiredMixin, View):
