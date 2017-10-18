@@ -17,6 +17,8 @@
 
 {% block "after_body" %}
     <script>
-        var simplemde = new SimpleMDE();
+        var simplemde = new SimpleMDE({ 
+            element: document.getElementById("id_content") 
+        });
     </script>
 {% endblock %}
