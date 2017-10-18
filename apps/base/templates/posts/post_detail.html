@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load md_tags %}
+
 {% block "content" %}
 
     {% with post=object %}
@@ -8,7 +10,7 @@
             {% if post.thumbnail %}
                 <img src="{{ post.thumbnail.url }}" alt="">
             {% endif %}
-            <div class="post-content">{{ post.content }}</div>
+            <div class="post-content">{{ post.content|markdown }}</div>
         </div>
 
         {% if request.user %}
