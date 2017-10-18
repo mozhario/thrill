@@ -68,10 +68,16 @@
                     <a href="#">Board</a>
                 </li>
                 <li class="user-nav-item">
-                    <a href="#">Subscribers</a>
+                    <a href="#">
+                        Subscribers
+                        <span class="counter-label">{{ user.subscribers|length }}</span>
+                    </a>
                 </li>
                 <li class="user-nav-item">
-                    <a href="#">Subscribed</a>
+                    <a href="#">
+                        Subscribed
+                        <span class="counter-label">{{ user.subscribed_to|length }}</span>
+                    </a>
                 </li>
             </ul>
             <div class="board user-board">
