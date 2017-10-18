@@ -4,6 +4,10 @@ from apps.users.models import User, UserPost
 
 
 def user_post_created_handler(sender, instance, created, **kwargs):
-    action.send(instance, verb='was saved')
+    action.send(
+        instance.user,
+        target=instance,
+        verb='created'
+    )
 
-post_save.connect(user_post_created_handler, sender=MyModel)
+post_save.connect(user_post_created_handler, sender=UserPost)
