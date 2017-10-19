@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
  
     'actstream',
+    'mptt',
 
     'apps.base',
     'apps.users',
