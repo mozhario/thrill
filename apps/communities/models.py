@@ -15,6 +15,9 @@ class Community(Timestamps):
 
     subscriptions = GenericRelation(UserSubscription)
 
+    def short_link_or_id(self):
+        return self.short_link or self.pk
+
 
 class CommunityPost(Post):
     community = models.ForeignKey(Community)
