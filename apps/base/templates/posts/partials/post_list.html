@@ -1,11 +1,7 @@
 <div class="posts-grid">
     {% for post in posts_list %}
 
-        {% if post.user %}
-            {% include "posts/partials/posts_item_userpost.html" %}
-        {% else %}
-            {% include "posts/partials/posts_item_communitypost.html" %}
-        {% endif %}
+        {% include "posts/partials/posts_item.html" %}
         
     {% endfor %}
 </div>
