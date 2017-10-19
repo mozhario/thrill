@@ -4,13 +4,11 @@ from apps.communities.models import CommunityPost
 
 
 def community_post_created_handler(sender, instance, created, **kwargs):
-    print('skdfksdjfsdfdsl')
-    print('skdfksdjfsdfdsl')
-    print('skdfksdjfsdfdsl')
-    action.send(
-        instance.community,
-        target=instance,
-        verb='created'
-    )
+    if created:
+        action.send(
+            instance.community,
+            target=instance,
+            verb='created'
+        )
 
 post_save.connect(community_post_created_handler, sender=CommunityPost)
