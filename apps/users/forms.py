@@ -5,7 +5,7 @@ from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.auth.admin import UserAdmin
 from registration.forms import RegistrationForm
 
-from .models import User
+from .models import User, UserPost
 
 
 class UserEditForm(ModelForm):
@@ -53,3 +53,24 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
             (None, {'fields': ('profile_pic', 'birth_date', 'location', 'bio', 'phone')}),
     )
+
+
+class UserPostForm(ModelForm):
+    class Meta:
+        model = UserPost
+        fields = [
+            'title',
+            'content',
+            'excerpt',
+            'thumbnail'
+        ]
+
+    def is_valid(self):
+        valid = super(UserPostForm, self).is_valid()
+        
+        filled_correctly = False
+
+        if self.cleaned_data['thumbnail'] or self.cleaned_data['content']:
+            filled_correctly = True
+        
+        return valid and filled_correctly

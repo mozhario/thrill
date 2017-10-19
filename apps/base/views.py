@@ -8,26 +8,6 @@ from apps.communities.models import Community
 from apps.users.models import User, UserPost
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'posts/post_form.html'
-    fields = [
-        'title',
-        'content',
-        'excerpt',
-        'thumbnail'
-    ]
-
-
-class PostEditView(LoginRequiredMixin, UpdateView):
-    template_name = 'posts/post_form.html'
-    fields = [
-        'title',
-        'content',
-        'excerpt',
-        'thumbnail'
-    ]
-
-
 def community_admin_required(view_func):
     def _wrapped_view_func(request, *args, **kwargs): 
         try:

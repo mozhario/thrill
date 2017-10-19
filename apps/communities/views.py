@@ -6,11 +6,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseForbidden
 from django.urls import reverse_lazy
 
-from apps.base.views import PostCreateView, PostEditView, CommunityAdminRequiredMixin
+from apps.base.views import CommunityAdminRequiredMixin
 from apps.users.models import User
 from apps.users.services import UserCommunitySubscriptionManager
 from .models import Community, CommunityPost
-from .forms import CommunityForm
+from .forms import CommunityForm, CommunityPostForm
 
 
 class CommunityDetail(DetailView):
@@ -83,11 +83,13 @@ class UnsubscribeFromCommunity(LoginRequiredMixin, View):
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
-class CommunityPostCreateView(CommunityAdminRequiredMixin, PostCreateView):
+class CommunityPostCreateView(CommunityAdminRequiredMixin, CreateView):
     # TODO refactoring for:
     # 1. getting community object by url param in more generic way
 
     model = CommunityPost
+    form_class = CommunityPostForm
+    template_name = 'posts/post_form.html'
 
     def get_community_object(self):
         try:
@@ -111,8 +113,9 @@ class CommunityPostCreateView(CommunityAdminRequiredMixin, PostCreateView):
         return redirect('community_post_detail', community_key, post.pk)
     
 
-class CommunityPostEditView(CommunityAdminRequiredMixin, PostEditView):
+class CommunityPostEditView(CommunityAdminRequiredMixin, UpdateView):
     model = CommunityPost
+    form_class = CommunityPostForm
     template_name = 'posts/post_form.html'
 
     def get_community_object(self):

@@ -3,7 +3,7 @@ from itertools import chain
 from operator import attrgetter
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import DetailView, ListView, FormView, UpdateView, DeleteView
+from django.views.generic import DetailView, ListView, FormView, UpdateView, DeleteView, CreateView
 from django.db.models import Q
 from registration.views import RegistrationView
 from django.contrib.auth.models import Group
@@ -15,9 +15,9 @@ from django.http import Http404
 from actstream.models import user_stream, following
 
 from .models import User, UserSubscription, UserPost
-from .forms import UserRegistrationForm, UserEditForm
+from .forms import UserRegistrationForm, UserEditForm, UserPostForm
 from .services import UserUserSubscriptionManager
-from apps.base.views import PostCreateView, PostEditView, PostAuthorRequiredMixin
+from apps.base.views import  PostAuthorRequiredMixin
 from apps.communities.models import CommunityPost
 
 
@@ -105,8 +105,9 @@ class ProfileView(LoginRequiredMixin, View):
         return redirect('user_detail', request.user.username)
 
 
-class UserPostCreateView(PostCreateView):
+class UserPostCreateView(CreateView):
     model = UserPost
+    form_class = UserPostForm
     template_name = 'posts/post_form.html'
 
     def form_valid(self, form):
@@ -116,8 +117,9 @@ class UserPostCreateView(PostCreateView):
         return redirect('user_post_detail', post.pk)
 
 
-class UserPostEditView(PostAuthorRequiredMixin, PostEditView):
+class UserPostEditView(PostAuthorRequiredMixin, UpdateView):
     model = UserPost
+    form_class = UserPostForm
     template_name = 'posts/post_form.html'
 
     def form_valid(self, form):

@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import Community
+from .models import Community, CommunityPost
 
 
 class CommunityForm(ModelForm):
@@ -23,3 +23,24 @@ class CommunityForm(ModelForm):
                 self._errors['not_unique_short_link'] = "Community with such short link already exist."
         
         return valid
+
+
+class CommunityPostForm(ModelForm):
+    class Meta:
+        model = CommunityPost
+        fields = [
+            'title',
+            'content',
+            'excerpt',
+            'thumbnail'
+        ]
+
+    def is_valid(self):
+        valid = super(CommunityPostForm, self).is_valid()
+        
+        filled_correctly = False
+
+        if self.cleaned_data['thumbnail'] or self.cleaned_data['content']:
+            filled_correctly = True
+        
+        return valid and filled_correctly
