@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% load md_tags %}
-{% load mptt_tags %}
 
 {% block "content" %}
 
@@ -34,19 +33,8 @@
 
             {# TODO comment form #}
 
-            {% with nodes=post.comments.all %}
-                <ul class="comments">
-                    {% recursetree nodes %}
-                        <li>
-                            {{ node.content }}
-                            {% if not node.is_leaf_node %}
-                                <ul class="children">
-                                    {{ children }}
-                                </ul>
-                            {% endif %}
-                        </li>
-                    {% endrecursetree %}
-                </ul>
+            {% with comments=post.comments.all %}
+                {% include 'comments/comments_tree.html' %}
             {% endwith %}
 
         {% endif %}
