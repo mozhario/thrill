@@ -1,0 +1,15 @@
+.chat {
+    position: relative;
+}
+
+.dialogs-nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+}
+
+.dialog {
+    margin-right: 250px;
+}

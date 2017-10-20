@@ -1,1 +1,38 @@
-[coming soon]
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block "head" %}
+    <link rel="stylesheet" type="text/css" href="{% static 'chat/css/chat.css' %}" />
+{% endblock %}
+
+{% block "content" %}
+    <div class="chat">
+        <div class="dialog">
+            {% if room %}
+                {{ room.title }}
+            {% endif %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message.text }}
+                {% endfor %}
+            {% else %}
+                No messages yet...
+            {% endif %}
+        </div>
+        <div class="dialogs-nav">
+            <ul>
+                {% for dialog in user.room_set.all %}
+                    <li class="dialogs-nav-item">
+                        {% if room == dialog %}
+                            >>>
+                        {% endif %}
+                        <a href="{% url 'chat_room' dialog.pk %}">{{ dialog.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <a href="{% url 'chatroom_create' %}" id="create_chat" class="action-button">+</a>
+{% endblock %}
