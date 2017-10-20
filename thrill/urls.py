@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'', include('apps.users.urls')),
     url(r'', include('apps.communities.urls')),
     url(r'', include('apps.comments.urls')),
+    url(r'', include('apps.chat.urls')),
 
     # static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
