@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 from apps.base.models import Timestamps
 
 
@@ -10,4 +12,9 @@ class Message(Timestamps):
 
 class Room(Timestamps):
     title = models.CharField(max_length=100)
+    # TODO add slug
     users = models.ManyToManyField('users.User')
+
+    def get_absolute_url(self):
+        return reverse('chat_room', args=[self.pk])
+
