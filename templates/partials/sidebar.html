@@ -1,5 +1,9 @@
 {% if request.user.is_authenticated %}
     Hello, {{ request.user.username }}
+
+    <a href="{% url 'user_profile' %}">Profile</a>
+    <a href="{% url 'user_feed' %}">Feed</a>
+    <a href="{% url 'messages' %}">Messages</a>
 {% else %}
     {# login form here #}   
 {% endif %}
