@@ -31,7 +31,22 @@
                 {% endif %}
             {% endif %}
 
-            {# TODO comment form #}
+            <div>Comments</div>
+
+            <div class="comment-form-wrapper">
+                <form action="{% url 'comment_add' %}" method="POST">
+                    {% csrf_token %}
+
+                    {% if post.user %}
+                        <input type="hidden" name="post-type" value="user-post">
+                    {% else %}
+                        <input type="hidden" name="post-type" value="community-post">
+                    {% endif %}
+                    <input type="hidden" name="post-id" value="{{ post.pk }}">
+                    <textarea name="comment-content" rows="4"></textarea>
+                    <button type="submit" class="btn add-comment">Add comment</button>
+                </form>
+            </div>
 
             {% with comments=post.comments.all %}
                 {% include 'comments/comments_tree.html' %}
