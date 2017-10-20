@@ -28,3 +28,21 @@ class CommentAdd(LoginRequiredMixin, View):
         )
         
         return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+class CommentReply(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        comment_id = request.POST['comment-id']
+        comment_content = request.POST['comment-content']
+
+        comment = Comment.objects.get(pk=comment_id)
+        post = comment.content_object
+
+        reply = Comment.objects.create(
+            content=comment_content,
+            content_object=post,
+            parent=comment,
+            author=request.user
+        )
+        
+        return redirect(request.META.get('HTTP_REFERER', '/'))

@@ -3,8 +3,14 @@
 {% with nodes=comments %}
     <ul class="comments">
         {% recursetree nodes %}
-            <li>
+            <li class="comment" data-id={{node.pk}}>
                 {{ node.content }}
+                
+                <a href="#" class="btn reply-comment"
+                    >Reply</a>
+
+                <div class="comment-form-wrapper" data-id={{node.pk}}></div>
+
                 {% if not node.is_leaf_node %}
                     <ul class="children">
                         {{ children }}
