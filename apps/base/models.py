@@ -19,5 +19,11 @@ class Post(Timestamps):
 
 	comments = GenericRelation('comments.Comment')
 
+	def model_label(self):
+		return "{app_label}.{class_name}".format(
+			app_label=self._meta.app_label,
+			class_name=self.__class__.__name__
+		)
+
 	class Meta:
 		abstract = True
