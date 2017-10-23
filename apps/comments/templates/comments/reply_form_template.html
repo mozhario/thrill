@@ -1,6 +1,6 @@
 <script type="text/html" id='reply_form_template'>
     <form action="/comments/<%= comment_id %>/reply/" method="POST">
-        <input name="csrfmiddlewaretoken" type="hidden" value="<% getCookie('csrftoken') %>" />
+        <input name="csrfmiddlewaretoken" type="hidden" value="<%= getCookie('csrftoken') %>" />
         <input name="comment-id" type="hidden" value="<%= comment_id %>" />
         <textarea name="comment-content" rows="3"></textarea>
         <button type="submit">Submit</button>
