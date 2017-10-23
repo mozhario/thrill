@@ -5,13 +5,16 @@
 {% block "content" %}
 
     {% with post=object %}
-        <div class="post">
+        <div class="post entty" data-id="{{ post.pk }}" data-model={{ post.model_label }}>
             <h2 class="post-title">{{ post.title }}</h2>
             {% if post.thumbnail %}
                 <img src="{{ post.thumbnail.url }}" alt="">
             {% endif %}
             <div class="post-content">{{ post.content|markdown }}</div>
+
+            <a href="{% url 'user_post_like' post.pk %}" class="like"><3</a> [{{ post.likes.count }}]
         </div>
+
 
         {% if request.user %}
             {% if post.user %}

@@ -145,6 +145,10 @@ class UserPostList(ListView):
     context_object_name = "posts_list"
 
 
+class UserPostAddLike(AddLikeBase):
+    model = UserPost
+
+
 class UserFeed(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         stream = [action.target for action in user_stream(request.user)]
@@ -153,5 +157,3 @@ class UserFeed(LoginRequiredMixin, View):
             'stream': stream,
             'follows': follows
         })
-
-

@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^posts/(?P<pk>\d+)/$', views.UserPostDetail.as_view(), name='user_post_detail'),
     url(r'^posts/(?P<pk>\d+)/edit/$', views.UserPostEditView.as_view(), name='user_post_edit'),
     url(r'^posts/(?P<pk>\d+)/delete/$', views.UserPostDeleteView.as_view(), name='user_post_delete'),
+    url(r'^posts/(?P<pk>\d+)/like/$', views.UserPostAddLike.as_view(), name='user_post_like'),
 
     url(r'^feed/$', views.UserFeed.as_view(), name='user_feed'),
     # url(r'^settings/delete-account$', UserDeleteView.as_view(), name='user_settings_delete'),
