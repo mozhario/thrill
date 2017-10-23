@@ -32,4 +32,16 @@ function getCookie(name) {
         )
     });
 
+    $('.like').on('click', function(e){
+        e.preventDefault();
+
+        var entity = $(this).closest('.entity');
+        var model_label = entity.attr('data-model');
+        var obj_id = entity.attr('data-id');
+
+        // $.ajax({
+        //     url: '/'
+        // });
+    });
+
 })( jQuery );
