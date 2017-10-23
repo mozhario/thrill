@@ -19,6 +19,7 @@ from .forms import UserRegistrationForm, UserEditForm, UserPostForm
 from .services import UserUserSubscriptionManager
 from apps.base.views import  PostAuthorRequiredMixin
 from apps.communities.models import CommunityPost
+from apps.likes.views import AddLikeBase
 
 
 class UserDetail(DetailView):
@@ -154,19 +155,3 @@ class UserFeed(LoginRequiredMixin, View):
         })
 
 
-# class UserFeed(LoginRequiredMixin, View):
-#     def get(self, request, *args, **kwargs):
-#         user = request.user
-#         # subscribed_to_users = filter(lambda x:  user.subscribed_to)
-        
-#         user_posts = UserPost.objects.filter(user__in=user.subscribed_to)
-#         community_posts = CommunityPost.objects.filter(community__in=user.subscribed_to)
-
-#         result_list = sorted(
-#             chain(user_posts, community_posts),
-#             key=attrgetter('created_at'),
-#             reverse=True)
-
-#         print(result_list)
-
-#         return render(request, 'posts/post_list.html', {'posts_list': result_list})
