@@ -6,7 +6,6 @@ from django.contrib.auth.models import UserManager as DefaultUserManager
 from django.core.cache import cache
 
 from apps.base.models import Post
-from apps.likes.models import Like
 
 
 class UserManager(DefaultUserManager):
@@ -59,7 +58,6 @@ class User(AbstractUser):
     phone = models.CharField(max_length=12, blank=True)
     profile_pic = models.ImageField(blank=True)
     subscriptions = GenericRelation('UserSubscription')
-    likes = GenericRelation(Like)
 
     objects = UserManager()
 

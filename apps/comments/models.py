@@ -12,6 +12,7 @@ from apps.likes.models import Like
 class Comment(MPTTModel, Timestamps):
     author = models.ForeignKey('users.User')
     content = models.TextField(max_length=240)
+    likes_count = models.PositiveIntegerField(default=0)
 
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
 

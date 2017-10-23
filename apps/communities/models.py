@@ -4,8 +4,6 @@ from django.contrib.contenttypes.fields import GenericRelation
 from apps.base.models import Timestamps
 from apps.base.models import Post
 from apps.users.models import User, UserSubscription
-from apps.likes.models import Like
-
 
 class Community(Timestamps):
     title = models.CharField(max_length=140)
@@ -15,7 +13,6 @@ class Community(Timestamps):
     admin = models.ForeignKey(User)
 
     subscriptions = GenericRelation(UserSubscription)
-    likes = GenericRelation(Like)
 
     def short_link_or_id(self):
         return self.short_link or self.pk
