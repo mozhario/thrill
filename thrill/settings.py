@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps.chat',
     'apps.comments',
     'apps.communities',
+    'apps.likes',
 ]
 
 SITE_ID = 1
