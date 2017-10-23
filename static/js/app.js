@@ -19,20 +19,17 @@ function getCookie(name) {
   
     $('.reply-comment').on('click', function(e) {
         e.preventDefault();
-        var reply_boxes = $('.comment .comment-form-wrapper');
+
         var comment = $(this).closest('.comment');
         var comment_id = comment.attr('data-id');
 
-        reply_boxes.removeClass('show');
+        form_template = $('#reply_form_template').html();
 
-        form_html =  '<form action="/comments/' + comment_id + '/reply/" method="POST">';
-        form_html += '<input name="csrfmiddlewaretoken" type="hidden" value="'+ getCookie('csrftoken') +'" />';
-        form_html += '<input name="comment-id" type="hidden" value="'+ comment_id +'" />';
-        form_html += '<textarea name="comment-content" rows="3"></textarea>';
-        form_html += '<button type="submit">Submit</button>'
-        form_html += '</form>';
-
-        comment.find('.comment-form-wrapper[data-id="'+comment_id+'"]').html(form_html)
+        comment.find('.comment-form-wrapper[data-id="'+comment_id+'"]').html(
+            _.template(form_template)({
+                comment_id: comment_id,
+            })
+        )
     });
 
 })( jQuery );

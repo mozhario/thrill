@@ -55,3 +55,7 @@
         {% endif %}
     {% endwith %}
 {% endblock %}
+
+{% block "after_body" %}
+    {% include 'comments/reply_form_template.html' %}
+{% endblock %}
