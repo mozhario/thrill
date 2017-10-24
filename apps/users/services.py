@@ -56,7 +56,7 @@ class UserCommunitySubscriptionManager(BaseUserSubscriptionManager):
         Subscribes a user to community_to_subscribe.
         '''
         user.subscriptions.create(user_id=user.pk, content_object=community_to_subscribe)
-        UserUserSubscriptionManager._update_user_subscribed_to_cache(user)
+        UserCommunitySubscriptionManager._update_user_subscribed_to_cache(user)
         follow(user, community_to_subscribe)
 
     @staticmethod
@@ -67,5 +67,5 @@ class UserCommunitySubscriptionManager(BaseUserSubscriptionManager):
         '''
         subscription = UserSubscription.objects.filter(user=user, object_id=community_to_unsubscribe.id)
         subscription.delete()
-        UserUserSubscriptionManager._update_user_subscribed_to_cache(user)
+        UserCommunitySubscriptionManager._update_user_subscribed_to_cache(user)
         unfollow(user, community_to_unsubscribe)
