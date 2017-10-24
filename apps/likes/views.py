@@ -3,20 +3,17 @@ from django.http import JsonResponse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.utils import IntegrityError
+from django.apps import apps
 
 from . import services
 from .models import Like
 
 
-class LikeUnlikeBase(LoginRequiredMixin, View):
-    '''
-    It's a base view that should be implemented with pointing out
-    some specific model
-    '''
-    model = None
+class LikeUnlike(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
-        obj = self.model.objects.get(pk=kwargs['pk'])
+        model = apps.get_model(request.GET['model_label'])
+        obj = model.objects.get(pk=request.GET['pk'])
 
         try:
             services.like(request.user, obj)

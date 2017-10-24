@@ -17,7 +17,6 @@ from .forms import UserRegistrationForm, UserEditForm, UserPostForm
 from .services import UserUserSubscriptionManager
 from apps.base.views import  PostAuthorRequiredMixin
 from apps.communities.models import CommunityPost
-from apps.likes.views import LikeUnlikeBase
 
 
 class UserDetail(DetailView):
@@ -141,10 +140,6 @@ class UserPostList(ListView):
     model = UserPost
     template_name = 'posts/post_list.html'
     context_object_name = "posts_list"
-
-
-class UserPostLikeUnlike(LikeUnlikeBase):
-    model = UserPost
 
 
 class UserFeed(LoginRequiredMixin, View):

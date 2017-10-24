@@ -35,21 +35,23 @@ function getCookie(name) {
     $('.like').on('click', function(e){
         e.preventDefault();
 
-        var entity = $(this).closest('.entity');
-        var obj_id = entity.attr('data-id');
+        var likes_bar = $(this).closest('.likes');
+        var obj_id = likes_bar.attr('data-id');
+        var model_label = likes_bar.attr('data-model-label')
         var url = $(this).attr('href');
 
         $.ajax({
             url: url,
             data: {
-                pk: obj_id
+                pk: obj_id,
+                model_label: model_label,
             },
             success: function(resp) {
                 if(resp.likes !== undefined) {
-                    var likes_count = $(entity).find('.likes-count');
+                    var likes_count = $(likes_bar).find('.likes-count');
                     likes_count.text(resp.likes);
 
-                    $(entity).find('.like').toggleClass('liked')
+                    $(likes_bar).find('.like').toggleClass('liked')
                 }
             }
         });

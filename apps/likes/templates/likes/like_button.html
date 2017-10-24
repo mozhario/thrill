@@ -1,0 +1,9 @@
+<div class="likes" data-id="{{ object.pk }}" data-model-label="{{ object.model_label }}">
+    {% if object in request.user.liked_objects %}
+        <a href="{% url 'like_unlike' %}" class="like liked" title="Unlike"><3</a>
+    {% else %}
+        <a href="{% url 'like_unlike' %}" class="like" title="Like"><3</a> 
+    {% endif %}
+
+    <span class="likes-count" title="{{ object.likes.count }} people liked this">{{ object.likes.count }}</span>
+</div>
