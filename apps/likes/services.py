@@ -5,6 +5,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
 
 from .models import Like
+from . import tasks
+
+
+def update_user_liked_objects_cache(user):
+    tasks.update_user_liked_objects_cache.delay(user.pk)
 
 
 def increment_likes_count(obj):
@@ -17,6 +22,7 @@ def increment_likes_count(obj):
         obj.save()
     except AttributeError:
         pass
+
 
 def decrement_likes_count(obj):
     '''
@@ -40,6 +46,7 @@ def like(user, obj):
         content_object=obj
     )
     increment_likes_count(obj)
+    update_user_liked_objects_cache(user)
 
 
 def unlike(user, obj):
@@ -55,6 +62,7 @@ def unlike(user, obj):
         )
         like.delete()
         decrement_likes_count(obj)
+        update_user_liked_objects_cache(user)
 
     except ObjectDoesNotExist:
         pass

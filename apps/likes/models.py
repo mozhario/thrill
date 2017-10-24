@@ -13,6 +13,3 @@ class Like(models.Model):
 
     class Meta:
         unique_together = ('user', 'content_type', 'object_id')
-
-
-# TODO add a counter field to posts and comments models
