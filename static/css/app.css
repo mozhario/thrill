@@ -444,3 +444,10 @@ img {
     background: #353535;
     color: white;
 }
+
+.tab-content {
+    display: none;
+}
+.tab-content.show {
+    display: block;
+}

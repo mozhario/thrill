@@ -64,29 +64,43 @@
                 {% endif %}
 
             <ul class="user-nav">
-                <li class="user-nav-item">
+                <li class="tab user-nav-item" data-tab="board">
                     <a href="#">Board</a>
                 </li>
-                <li class="user-nav-item">
+                <li class="tab user-nav-item" data-tab="subscribers">
                     <a href="#">
                         Subscribers
                         <span class="counter-label">{{ user.subscribers|length }}</span>
                     </a>
                 </li>
-                <li class="user-nav-item">
+                <li class="tab user-nav-item" data-tab="subscribed">
                     <a href="#">
                         Subscribed
                         <span class="counter-label">{{ user.subscribed_to|length }}</span>
                     </a>
                 </li>
             </ul>
-            <div class="board user-board">
-                <h3>{{ user.username }}'s board</h3>
 
-                <div class="posts-grid">
-                    {% with posts_list=user.userpost_set.all %}
-                        {% include "posts/partials/post_list.html" %}
-                    {% endwith %}
+            <div class="user-details">
+
+                <div id="board" class="tab-content show">
+                    <div class="board user-board">
+                        <h3>{{ user.username }}'s board</h3>
+
+                        <div class="posts-grid">
+                            {% with posts_list=user.userpost_set.all %}
+                                {% include "posts/partials/post_list.html" %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+
+                <div id="subscribers" class="tab-content">
+                    subscribers here
+                </div>
+
+                <div id="subscribed" class="tab-content">
+                    subscribed users here
                 </div>
             </div>
         </div>
