@@ -4,10 +4,34 @@
     <ul class="comments">
         {% recursetree nodes %}
             <li class="comment" data-id={{node.pk}}>
-                {{ node.content }}
+                <div class="comment-box">
+                    <div class="comment-info">
+                        <div class="card-author">
+                            {% if node.author.profile_pic %}
+                                <img src="{{ node.author.profile_pic.url }}" alt="">
+                            {% endif %}
+                            <a href="{% url 'user_detail' node.author.username %}">
+                                {% if node.author.first_name or node.author.last_name %}
+                                    {{ node.author.first_name }}
+                                    {{ node.author.last_name }}
+                                {% else %}
+                                    {{ node.author.username }}
+                                {% endif %}
+                            </a>
+                        </div>
+                        <span class="card-date date">{{ node.created_at }}</span>
+                    </div>
+                    
+                    <div class="comment-content">
+                        {{ node.content }}
+                    </div>
+
+                    <div class="comment-footer"> 
+                        <a href="#" class="btn reply-comment">Reply</a>
+                    </div>
+                    
+                </div>
                 
-                <a href="#" class="btn reply-comment"
-                    >Reply</a>
 
                 <div class="comment-form-wrapper" data-id={{node.pk}}></div>
 

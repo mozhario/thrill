@@ -378,3 +378,51 @@ img {
     background: linear-gradient(90deg, rgb(215, 73, 40) 0%, rgb(181, 74, 155) 80%);
     text-shadow: 1px 1px 2px rgba(0, 0, 20, 0.75);
 }
+
+.comments,
+.comments .children {
+    list-style: none;
+}
+.comment-box {
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    /*border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;*/
+
+}
+.comment-info {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+}
+.comment-info >* {
+    margin-right: 10px;
+}
+.comment-box .card-author {
+    display: inline-block;
+}
+.comment-box .date {
+    display: inline-block;
+}
+.comment-content {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 3px 8px;
+    border: 2px solid #353535;
+    background: white;
+    color: #353535;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #353535;
+    color: white;
+}
