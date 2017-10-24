@@ -46,7 +46,7 @@ function getCookie(name) {
             },
             success: function(resp) {
                 console.log(resp);
-                if(resp.likes) {
+                if(resp.likes !== undefined) {
                     var likes_count = $(entity).find('.likes-count');
                     console.log(likes_count);
                     likes_count.text(resp.likes);

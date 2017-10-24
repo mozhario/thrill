@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.utils import IntegrityError
 
 from . import services
 from .models import Like
 
 
-class AddLikeBase(LoginRequiredMixin, View):
+class LikeUnlikeBase(LoginRequiredMixin, View):
     '''
     It's a base view that should be implemented with pointing out
     some specific model
@@ -20,5 +21,7 @@ class AddLikeBase(LoginRequiredMixin, View):
         try:
             services.like(request.user, obj)
             return JsonResponse({'likes': obj.likes_count})
-        except Exception as e:
-            return JsonResponse({'error': e.args})
+        except IntegrityError as e:
+            # If already liked - unlike
+            services.unlike(request.user, obj)
+            return JsonResponse({'likes': obj.likes_count})

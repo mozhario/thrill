@@ -17,7 +17,7 @@ from .forms import UserRegistrationForm, UserEditForm, UserPostForm
 from .services import UserUserSubscriptionManager
 from apps.base.views import  PostAuthorRequiredMixin
 from apps.communities.models import CommunityPost
-from apps.likes.views import AddLikeBase
+from apps.likes.views import LikeUnlikeBase
 
 
 class UserDetail(DetailView):
@@ -143,7 +143,7 @@ class UserPostList(ListView):
     context_object_name = "posts_list"
 
 
-class UserPostAddLike(AddLikeBase):
+class UserPostLikeUnlike(LikeUnlikeBase):
     model = UserPost
 
 
