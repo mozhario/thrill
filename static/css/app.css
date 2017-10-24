@@ -405,9 +405,15 @@ img {
 .comment-box .date {
     display: inline-block;
 }
+.comment-box .likes {
+    display: inline-block;
+}
 .comment-content {
     margin-bottom: 8px;
     font-size: 14px;
+}
+.comment-footer >* {
+    margin-right: 8px;
 }
 
 .btn {
@@ -421,7 +427,6 @@ img {
     font-weight: bold;
     cursor: pointer;
 }
-
 .btn:hover {
     background: #353535;
     color: white;

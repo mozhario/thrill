@@ -28,6 +28,10 @@
 
                     <div class="comment-footer"> 
                         <a href="#" class="btn reply-comment">Reply</a>
+
+                        {% with object=node %}
+                            {% include "likes/like_button.html" %}
+                        {% endwith %}
                     </div>
                     
                 </div>
