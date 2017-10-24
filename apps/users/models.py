@@ -41,10 +41,22 @@ class UserManager(DefaultUserManager):
 
         return subscribed_to
 
+    @staticmethod
+    def _get_liked_objects(obj):
+        cache_key = 'user_{id}_liked'.format(id=obj.pk)
+        liked  = cache.get(cache_key, None)
+        
+        if liked == None:
+            liked = [item.content_object for item in obj.like_set.all()]
+            cache.set(cache_key, liked, 60 * 60)
+
+        return liked
+
     def get(self, *args, **kwargs):
         obj = super(UserManager, self).get(*args, **kwargs)
         obj.subscribers = self._get_subscribers(obj)
         obj.subscribed_to = self._get_subscribed_to(obj)
+        obj.liked_objects = self._get_liked_objects(obj)
         return obj
 
 
@@ -60,9 +72,6 @@ class User(AbstractUser):
     subscriptions = GenericRelation('UserSubscription')
 
     objects = UserManager()
-
-    def liked_objects(self):
-        return [item.content_object for item in self.like_set.all()]
 
 
 class UserSubscription(models.Model):
