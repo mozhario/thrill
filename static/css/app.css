@@ -202,12 +202,6 @@ img {
 .entities-list-item .card {
     margin: 0 10px 10px;
 }
-/*
-.users .users-item {
-    width: 100%;
-    float: left;
-    padding: 10px;
-}*/
 
 .users-item .card {
     margin: 0 10px 10px;
@@ -255,6 +249,23 @@ img {
     margin-left: 300px;
     padding: 10px;
 }
+
+@media(min-width: 700px) {
+    .left-column + .page-content .entities-list-item {
+        width: 100%;
+    }
+}
+@media(min-width: 1240px) {
+    .left-column + .page-content .entities-list-item {
+        width: 50%;
+    }
+}
+@media(min-width: 1400px) {
+    .left-column + .page-content .entities-list-item {
+        width: 33.33%;
+    }
+}
+
 
 .user-nav {
     margin: 0;
@@ -447,6 +458,7 @@ img {
 
 .tab-content {
     display: none;
+    padding-top: 20px;
 }
 .tab-content.show {
     display: block;
