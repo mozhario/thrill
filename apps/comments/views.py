@@ -14,9 +14,6 @@ class CommentAdd(LoginRequiredMixin, View):
         post_id = request.POST['post-id']
         content = request.POST['comment-content']
 
-        app_label, model_name = post_type.split(".")
-        print(app_label, model_name)
-
         post_model = apps.get_model(post_type)
         post = post_model.objects.get(pk=post_id)
 
