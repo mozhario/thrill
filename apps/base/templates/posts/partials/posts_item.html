@@ -37,6 +37,11 @@
                         </a>
                     {% endif %}
                 </div>
+                
+                {% with object=post %}
+                    {% include "likes/like_button.html" %}
+                {% endwith %}
+
                 <span class="card-date date">{{ post.created_at }}</span>
 
                 {% if post.user %}

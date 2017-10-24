@@ -172,13 +172,25 @@ img {
     color: #555;
 }
 .card-link {
-    position: relative;
+    position: absolute;
+    right: 10px;
+    bottom: 4px;
 }
 .card-link:visited {
     color: #555;
 }
 .card-link:hover {
     color: #333;
+}
+.card-footer {
+    position: relative;
+    width: 100%;
+}
+
+.card .likes {
+    display: inline-block;
+    font-size: 10px;
+    margin-right: 6px;
 }
 
 
