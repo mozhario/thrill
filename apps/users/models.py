@@ -61,6 +61,9 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+    def liked_objects(self):
+        return [item.content_object for item in self.like_set.all()]
+
 
 class UserSubscription(models.Model):
 	'''
