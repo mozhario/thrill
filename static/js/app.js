@@ -45,11 +45,11 @@ function getCookie(name) {
                 pk: obj_id
             },
             success: function(resp) {
-                console.log(resp);
                 if(resp.likes !== undefined) {
                     var likes_count = $(entity).find('.likes-count');
-                    console.log(likes_count);
                     likes_count.text(resp.likes);
+
+                    $(entity).find('.like').toggleClass('liked')
                 }
             }
         });

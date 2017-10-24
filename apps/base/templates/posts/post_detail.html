@@ -5,14 +5,23 @@
 {% block "content" %}
 
     {% with post=object %}
-        <div class="post entity" data-id="{{ post.pk }}" data-model={{ post.model_label }}>
+        <div class="post entity" data-id="{{ post.pk }}">
             <h2 class="post-title">{{ post.title }}</h2>
             {% if post.thumbnail %}
                 <img src="{{ post.thumbnail.url }}" alt="">
             {% endif %}
             <div class="post-content">{{ post.content|markdown }}</div>
 
-            <a href="{% url 'user_post_like' post.pk %}" class="like"><3</a> <span class="likes-count">[{{ post.likes.count }}]</span>
+            <div class="likes">
+                {% if post in request.user.liked_objects %}
+                    <a href="{% url 'user_post_like' post.pk %}" class="like liked" title="Unlike"><3</a>
+                {% else %}
+                    <a href="{% url 'user_post_like' post.pk %}" class="like" title="Like"><3</a> 
+                {% endif %}
+
+                <span class="likes-count" title="{{ post.likes.count }} people liked this">{{ post.likes.count }}</span>
+            </div>
+
         </div>
 
 
