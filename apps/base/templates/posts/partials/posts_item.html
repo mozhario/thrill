@@ -32,7 +32,7 @@
                         {% if post.community.avatar_pic %}
                             <img src="{{ post.community.avatar_pic.url }}" alt="">
                         {% endif %}
-                        <a href="{% url 'user_detail' post.community.short_link_or_id %}">
+                        <a href="{% url 'community_detail' post.community.short_link_or_id %}">
                             {{ post.community.title }}
                         </a>
                     {% endif %}
