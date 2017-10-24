@@ -6,39 +6,7 @@
 
 <div class="entities-list users">
 
-    {% for user in users %}
-        <div class="entities-list-item users-item">
-            <div class="card card-horizontal user-card">
-                <div class="card-thumbnail user-avatar">
-                    <a href="{% url 'user_detail' user.username %}">
-                        {% if user.profile_pic %}
-                            <img class="avatar" src="{{ user.profile_pic.url }}"/>
-                        {% else %}
-                            <img class="avatar" src="{% static 'img/placeholder-image.png' %}"/>
-                        {% endif %}
-                    </a>
-                </div>
-                <div class="card-content">
-                    <div class="card-title user-full-name">
-                        {{ user.first_name }}
-                        {{ user.last_name }}
-                    </div>
-                    <div class="card-subtitle user-username">
-                        <a href="{% url 'user_detail' user.username %}">@{{ user.username }}</a>
-                    </div>
-                    <div class="card-text">
-                        <div class="user-bio user-bio-excerpt">
-                            {{ user.bio|truncatewords:10 }}
-                        </div>
-                        <div class="location">
-                            {{ user.location }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    {% endfor %}
+    {% include "users/partials/user_list.html" %}
     
 </div>
 
