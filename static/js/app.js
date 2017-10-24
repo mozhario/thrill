@@ -36,12 +36,23 @@ function getCookie(name) {
         e.preventDefault();
 
         var entity = $(this).closest('.entity');
-        var model_label = entity.attr('data-model');
         var obj_id = entity.attr('data-id');
+        var url = $(this).attr('href');
 
-        // $.ajax({
-        //     url: '/'
-        // });
+        $.ajax({
+            url: url,
+            data: {
+                pk: obj_id
+            },
+            success: function(resp) {
+                console.log(resp);
+                if(resp.likes) {
+                    var likes_count = $(entity).find('.likes-count');
+                    console.log(likes_count);
+                    likes_count.text(resp.likes);
+                }
+            }
+        });
     });
 
 })( jQuery );

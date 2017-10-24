@@ -1,6 +1,4 @@
 from functools import reduce
-from itertools import chain
-from operator import attrgetter
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, FormView, UpdateView, DeleteView, CreateView
