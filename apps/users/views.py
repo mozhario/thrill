@@ -38,6 +38,10 @@ class UserDetailSubscribed(UserDetail):
     template_name = 'users/partials/tab_subscribed.html'
 
 
+class UserDetailCommunities(UserDetail):
+    template_name = 'users/partials/tab_communities.html'
+
+
 class UserDetailLiked(UserDetail):
     template_name = 'users/partials/tab_liked.html'
 

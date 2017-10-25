@@ -14,6 +14,8 @@ class Community(Timestamps):
 
     subscriptions = GenericRelation(UserSubscription)
 
+    type='community'
+
     def short_link_or_id(self):
         return self.short_link or self.pk
 

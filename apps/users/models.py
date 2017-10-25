@@ -82,6 +82,9 @@ class User(AbstractUser):
     def subscribed_to_users(self):
         return helpers.filter_entities_by_type(self.subscribed_to, 'user')
 
+    def subscribed_to_communities(self):
+        return helpers.filter_entities_by_type(self.subscribed_to, 'community')
+
 
 
 class UserSubscription(models.Model):

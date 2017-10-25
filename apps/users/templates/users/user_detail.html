@@ -76,7 +76,13 @@
                 <li class="tab user-nav-item" data-tab="subscribed">
                     <a href="{% url "user_detail_subscribed" user.username %}">
                         Subscribed
-                        <span class="counter-label">{{ user.subscribed_to|length }}</span>
+                        <span class="counter-label">{{ user.subscribed_to_users|length }}</span>
+                    </a>
+                </li>
+                <li class="tab user-nav-item" data-tab="subscribed">
+                    <a href="{% url "user_detail_communities" user.username %}">
+                        Communities
+                        <span class="counter-label">{{ user.subscribed_to_communities|length }}</span>
                     </a>
                 </li>
                 <li class="tab user-nav-item" data-tab="liked">
