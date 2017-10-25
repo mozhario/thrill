@@ -73,11 +73,16 @@ class User(AbstractUser):
 
     objects = UserManager()
 
-    def liked_posts(self):
-        posts = list(filter(
-            lambda x: getattr(x, 'type', None) == 'post',
-            self.liked_objects
+    def _filter_entities_by_type(self, entities, type):
+        entities = list(filter(
+            lambda x: getattr(x, 'type', None) == type,
+            entities
         ))
+        return entities
+
+
+    def liked_posts(self):
+        posts = self._filter_entities_by_type(self.liked_objects, 'post')
         return posts
 
 
