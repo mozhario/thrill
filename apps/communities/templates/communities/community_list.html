@@ -4,31 +4,7 @@
 
 {% block "content" %}
     <div class="entities-list communities-list">
-        {% for community in communities %}
-            <div class="entities-list-item communities-list-item">
-                <div class="card card-horizontal">
-                    <div class="card-thumbnail">
-                        {% if community.avatar_pic %}
-                            <img src="{{ community.avatar_pic }}" alt="">
-                        {% else %}
-                            <img class="avatar" src="{% static 'img/placeholder-image.png' %}"/>
-                        {% endif %}
-                    </div>
-                    <div class="card-content">
-                        {% if community.short_link %}
-                            <div class="card-title">
-                                <a href="{% url 'community_detail' community.short_link_or_id %}">
-                                    {{ community.title }}
-                                </a>
-                            </div>
-                        {% endif %}
-                        <div class="card-text">{{ community.description}}</div>
-
-                        {{ community.subscriptions.count }} subscribers
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+        {% include "communities/partials/community_list.html" %}
     </div>
 
 {% endblock %}
