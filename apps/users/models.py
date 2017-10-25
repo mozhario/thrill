@@ -6,6 +6,7 @@ from django.contrib.auth.models import UserManager as DefaultUserManager
 from django.core.cache import cache
 
 from apps.base.models import Post
+from apps.base import helpers
 
 
 class UserManager(DefaultUserManager):
@@ -73,17 +74,9 @@ class User(AbstractUser):
 
     objects = UserManager()
 
-    def _filter_entities_by_type(self, entities, type):
-        entities = list(filter(
-            lambda x: getattr(x, 'type', None) == type,
-            entities
-        ))
-        return entities
-
-
     def liked_posts(self):
-        posts = self._filter_entities_by_type(self.liked_objects, 'post')
-        return posts
+        return helpers.filter_entities_by_type(self.liked_objects, 'post')
+
 
 
 class UserSubscription(models.Model):
