@@ -73,6 +73,13 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+    def liked_posts(self):
+        posts = list(filter(
+            lambda x: getattr(x, 'type', None) == 'post',
+            self.liked_objects
+        ))
+        return posts
+
 
 class UserSubscription(models.Model):
 	'''
