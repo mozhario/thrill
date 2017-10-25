@@ -21,10 +21,11 @@ from apps.users.views import UserRegistrationView
 from apps.users.forms import UserRegistrationForm
 
 from . import settings
+from apps.admin_site.admin import admin_site
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin_site.urls),
 
     # Registration (django-registration)
     url(r'^accounts/register/$', UserRegistrationView.as_view(), name='registration_register'),

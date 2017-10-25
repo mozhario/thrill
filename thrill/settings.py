@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'mptt',
 
     'apps.base',
+    'apps.admin_site',
     'apps.users',
     'apps.chat',
     'apps.comments',
