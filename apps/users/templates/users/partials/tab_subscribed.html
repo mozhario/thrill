@@ -1,0 +1,11 @@
+{% extends "users/user_detail.html" %}
+
+{% block "user_tab" %}
+
+    <div id="subscribed" class="tab-content">
+        {% with users=user.subscribed_to %}
+            {% include "users/partials/user_list.html" %}
+        {% endwith %}
+    </div>
+
+{% endblock %}

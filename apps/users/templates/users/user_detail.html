@@ -65,22 +65,22 @@
 
             <ul class="user-nav">
                 <li class="tab user-nav-item" data-tab="board">
-                    <a href="#">Board</a>
+                    <a href="{% url "user_detail" user.username %}">Board</a>
                 </li>
                 <li class="tab user-nav-item" data-tab="subscribers">
-                    <a href="#">
+                    <a href="{% url "user_detail_subscribers" user.username %}">
                         Subscribers
                         <span class="counter-label">{{ user.subscribers|length }}</span>
                     </a>
                 </li>
                 <li class="tab user-nav-item" data-tab="subscribed">
-                    <a href="#">
+                    <a href="{% url "user_detail_subscribed" user.username %}">
                         Subscribed
                         <span class="counter-label">{{ user.subscribed_to|length }}</span>
                     </a>
                 </li>
                 <li class="tab user-nav-item" data-tab="liked">
-                    <a href="#">
+                    <a href="{% url "user_detail_liked" user.username %}">
                         Liked
                         <span class="counter-label">{{ user.liked_objects|length }}</span>
                     </a>
@@ -88,34 +88,18 @@
             </ul>
 
             <div class="user-details">
-
-                <div id="board" class="tab-content show">
-                    <div class="board user-board">
-                        <div class="posts-grid">
-                            {% with posts_list=user.userpost_set.all %}
-                                {% include "posts/partials/post_list.html" %}
-                            {% endwith %}
+                {% block "user_tab" %}
+                    <div id="board" class="tab-content show">
+                        <div class="board user-board">
+                            <div class="posts-grid">
+                                {% with posts_list=user.userpost_set.all %}
+                                    {% include "posts/partials/post_list.html" %}
+                                {% endwith %}
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endblock %}
 
-                <div id="subscribers" class="tab-content">
-                    {% with users=user.subscribers %}
-                        {% include "users/partials/user_list.html" %}
-                    {% endwith %}
-                </div>
-
-                <div id="subscribed" class="tab-content">
-                    {% with users=user.subscribed_to %}
-                        {% include "users/partials/user_list.html" %}
-                    {% endwith %}
-                </div>
-
-                <div id="liked" class="tab-content">
-                    {% with posts_list=user.liked_posts %}
-                          {% include "posts/partials/post_list.html" %}
-                    {% endwith %}
-                </div>
             </div>
         </div>
 

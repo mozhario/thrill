@@ -1,0 +1,10 @@
+{% extends "users/user_detail.html" %}
+
+{% block "user_tab" %}
+    <div id="liked" class="tab-content">
+        {% with posts_list=user.liked_posts %}
+              {% include "posts/partials/post_list.html" %}
+        {% endwith %}
+    </div>
+
+{% endblock %}

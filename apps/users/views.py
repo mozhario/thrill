@@ -30,6 +30,17 @@ class UserDetail(DetailView):
             raise Http404("We didn't found a person with username %s" % (self.kwargs['username']))
 
 
+class UserDetailSubscribers(UserDetail):
+    template_name = 'users/partials/tab_subscribers.html'
+
+
+class UserDetailSubscribed(UserDetail):
+    template_name = 'users/partials/tab_subscribed.html'
+
+
+class UserDetailLiked(UserDetail):
+    template_name = 'users/partials/tab_liked.html'
+
 
 class UserList(ListView):
     model = User
