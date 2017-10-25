@@ -26,5 +26,7 @@ class Post(Timestamps):
 			class_name=self.__class__.__name__
 		)
 
+	type = 'post'
+
 	class Meta:
 		abstract = True
