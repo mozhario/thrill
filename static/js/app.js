@@ -57,12 +57,12 @@ function getCookie(name) {
         });
     });
 
-    $('.tab').on('click', function(e) {
-        e.preventDefault();
-
-        var tab = $(this).attr('data-tab');
-        $('.tab-content').removeClass('show');
-        $('.tab-content#' + tab).addClass('show');
-    });
+    // $('.tab').on('click', function(e) {
+    //     e.preventDefault();
+    //
+    //     var tab = $(this).attr('data-tab');
+    //     $('.tab-content').removeClass('show');
+    //     $('.tab-content#' + tab).addClass('show');
+    // });
 
 })( jQuery );
