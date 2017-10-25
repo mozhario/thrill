@@ -3,7 +3,7 @@
 {% block "user_tab" %}
 
     <div id="subscribed" class="tab-content">
-        {% with users=user.subscribed_to %}
+        {% with users=user.subscribed_to_users %}
             {% include "users/partials/user_list.html" %}
         {% endwith %}
     </div>

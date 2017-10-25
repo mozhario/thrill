@@ -74,8 +74,13 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+    type = 'user'
+
     def liked_posts(self):
         return helpers.filter_entities_by_type(self.liked_objects, 'post')
+
+    def subscribed_to_users(self):
+        return helpers.filter_entities_by_type(self.subscribed_to, 'user')
 
 
 
