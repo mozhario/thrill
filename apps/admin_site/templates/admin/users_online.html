@@ -1,5 +1,32 @@
 {% extends "admin/base.html" %}
 
-{% block "content" %}
-    Hello there!
+{% block extrastyle %}
+    <style>
+        table {
+{#            width: 100%;#}
+        }
+        thead {
+            background: #222;
+            color: whitesmoke;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h2>Users online [{{ users|length }}]</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>Username</td>
+                <td>Page</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for username, page in users.items %}
+                <td><a href="{% url 'user_detail' username %}">{{ username }}</a></td>
+                <td>{{ page }}</td>
+            {% endfor %}
+
+        </tbody>
+    </table>
 {% endblock %}

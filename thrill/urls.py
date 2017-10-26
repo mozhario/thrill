@@ -24,6 +24,7 @@ from . import settings
 from apps.admin_site.admin import admin_site
 
 
+
 urlpatterns = [
     url(r'^admin/', admin_site.urls),
 
