@@ -23,8 +23,10 @@
         </thead>
         <tbody>
             {% for username, page in users.items %}
-                <td><a href="{% url 'user_detail' username %}">{{ username }}</a></td>
-                <td>{{ page }}</td>
+                <tr>
+                    <td><a href="{% url 'user_detail' username %}">{{ username }}</a></td>
+                    <td>{{ page }}</td>
+                </tr>
             {% endfor %}
 
         </tbody>
