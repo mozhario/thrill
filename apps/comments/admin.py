@@ -1,6 +1,5 @@
-from django.contrib import admin
-
 from .models import Comment
+from apps.admin_site.admin import admin_site
 
 
-admin.site.register(Comment)
+admin_site.register(Comment)

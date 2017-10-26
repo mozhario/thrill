@@ -1,12 +1,11 @@
-from django.contrib import admin
-# from django.contrib.auth.admin import UserAdmin
 from .models import User, UserSubscription, UserPost
 from django.contrib.auth.models import Permission
 
 from .forms import CustomUserAdmin
+from apps.admin_site.admin import admin_site
 
 
-admin.site.register(User, CustomUserAdmin)
-admin.site.register(UserSubscription)
-admin.site.register(Permission)
-admin.site.register(UserPost)
+admin_site.register(User, CustomUserAdmin)
+admin_site.register(UserSubscription)
+admin_site.register(Permission)
+admin_site.register(UserPost)

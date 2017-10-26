@@ -1,6 +1,6 @@
-from django.contrib import admin
 from .models import Community, CommunityPost
 
+from apps.admin_site.admin import admin_site
 
-admin.site.register(Community)
-admin.site.register(CommunityPost)
+admin_site.register(Community)
+admin_site.register(CommunityPost)
