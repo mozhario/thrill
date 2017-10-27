@@ -22,6 +22,7 @@ from apps.users.forms import UserRegistrationForm
 
 from . import settings
 from apps.admin_site.admin import admin_site
+from apps.base.views import Trending
 
 
 
@@ -37,6 +38,8 @@ urlpatterns = [
     url(r'', include('apps.comments.urls')),
     url(r'', include('apps.chat.urls')),
     url(r'', include('apps.likes.urls')),
+
+    url(r'^trending/$', Trending.as_view(), name='trending')
 
     # static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),

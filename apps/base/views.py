@@ -3,6 +3,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404, HttpResponseForbidden
 from django.utils.decorators import method_decorator
+from django.views import View
+from django.db.models import Count
+from django.db.models import FloatField
+from django.db.models.functions import Cast
+from django.db.models import Case, F, Sum, When, Max
+from django.shortcuts import render
 
 from apps.communities.models import Community
 from apps.users.models import User, UserPost
@@ -52,3 +58,16 @@ class PostAuthorRequiredMixin():
     @method_decorator(post_author_required)
     def dispatch(self, request, *args, **kwargs):
         return super(PostAuthorRequiredMixin, self).dispatch(request, *args, **kwargs)
+
+
+class Trending(View):
+    def get(self, request, *args, **kwargs):
+        posts = UserPost.objects \
+                    .annotate(hype_ratio=(
+                        Cast(F('likes_count'), output_field=FloatField() ) / Cast(Count('user__subscriptions'), output_field=FloatField()) ),
+                    ).order_by('-hype_ratio')[:10]
+
+        # posts = UserPost.objects.annotate(hype_ratio=Max('likes_count')).order_by('-likes_count')
+        # print(posts.query)
+        # print([post.hype_ratio for post in posts])
+        return render(request, 'posts/post_list.html', context={'posts_list': posts})
