@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
- 
+
+    'rest_framework',
     'actstream',
     'mptt',
 
@@ -174,6 +175,13 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SESSION_CACHE_ALIAS = "sessions"
 
 # CELERY_IMPORTS = ("tasks", )
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAdminUser',
+    # ],
+    # 'PAGE_SIZE': 10
+}
 
 if DEBUG:
     from .settings_dev import *

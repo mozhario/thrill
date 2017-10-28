@@ -37,6 +37,8 @@ urlpatterns = [
     url(r'', include('apps.chat.urls')),
     url(r'', include('apps.likes.urls')),
 
+    url(r'^api_v1/', include('apps.api_v1.urls')),
+
     # static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
     # staticfiles_urlpatterns(),
