@@ -27,10 +27,10 @@ class UserEditForm(ModelForm):
 
 
 class UserRegistrationForm(RegistrationForm):
-    '''
+    """
     User register form overriden to add some custom
     user model fields.
-    '''
+    """
 
     class Meta:
         model = User

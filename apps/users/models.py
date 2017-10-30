@@ -10,14 +10,14 @@ from apps.base import helpers
 
 
 class UserManager(DefaultUserManager):
-    '''
+    """
     User model manager that adds subscribers to single objects
     as well as objects in querysets
 
     Usage:
         user.subscribers - contains objects of users that subscribed to user
         user.subscribed_to - contains objects of users that user is subscribed to
-    '''
+    """
 
     # TODO refactor subscribers managing methods to return querysets instead of lists
     @staticmethod
@@ -62,9 +62,9 @@ class UserManager(DefaultUserManager):
 
 
 class User(AbstractUser):
-    '''
+    """
     Custom user model that adds some account profile fieds
-    '''
+    """
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
@@ -88,9 +88,9 @@ class User(AbstractUser):
 
 
 class UserSubscription(models.Model):
-	'''
+	"""
 	Relation between user and the entity he is subscribed to.
-	'''
+	"""
 	user = models.ForeignKey(User)
 	created_at = models.DateTimeField(auto_now_add=True)
 
