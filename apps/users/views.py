@@ -118,7 +118,7 @@ class ProfileView(LoginRequiredMixin, View):
         return redirect('user_detail', request.user.username)
 
 
-class UserPostCreateView(CreateView):
+class UserPostCreateView(LoginRequiredMixin, CreateView):
     model = UserPost
     form_class = UserPostForm
     template_name = 'posts/post_form.html'
