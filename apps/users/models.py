@@ -86,18 +86,17 @@ class User(AbstractUser):
         return helpers.filter_entities_by_type(self.subscribed_to, 'community')
 
 
-
 class UserSubscription(models.Model):
-	"""
-	Relation between user and the entity he is subscribed to.
-	"""
-	user = models.ForeignKey(User)
-	created_at = models.DateTimeField(auto_now_add=True)
+    """
+    Relation between user and the entity he is subscribed to.
+    """
+    user = models.ForeignKey(User)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-	content_type = models.ForeignKey(ContentType)
-	object_id = models.PositiveIntegerField()
-	content_object = GenericForeignKey('content_type', 'object_id')
-	
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
 
 class UserPost(Post):
     user = models.ForeignKey(User)
