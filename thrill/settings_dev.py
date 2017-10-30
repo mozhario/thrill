@@ -11,6 +11,7 @@ MIDDLEWARE += (
 
 INSTALLED_APPS += (
     'debug_toolbar',
+    'autofixture',
 )
 
 DEBUG_TOOLBAR_PANELS = [
