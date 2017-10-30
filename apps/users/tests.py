@@ -1,3 +1,45 @@
-from django.test import TestCase
+import os
 
-# Create your tests here.
+from django.test import TestCase
+from django.core.files import File
+from django.core.files.uploadedfile import SimpleUploadedFile
+
+from .models import User, UserPost
+from .forms import UserPostForm
+
+from django.conf import settings
+
+
+class UserPostFormTestCase(TestCase):
+    def setUp(self):
+        self.dummy_user = User.objects.create(
+            first_name='John',
+            last_name='Doe',
+            username='dummyuser',
+            email='dummy@ma.il',
+            password='dummypass'
+        )
+
+        # FIXME: UserPost doesn't accept such an image object, so thumbnail tests cannot be accomplished
+        image_path = os.path.join(settings.BASE_DIR, 'static/img/placeholder-image.png')
+        self.dummy_image = SimpleUploadedFile(name='test_image.jpg', content=open(image_path, 'rb').read(), content_type='image/png')
+
+    def test_create_empty_post(self):
+        form = UserPostForm({'user_id': self.dummy_user.id})
+        self.assertEqual(False, form.is_valid())
+
+    def test_create_post_with_title_only(self):
+        form = UserPostForm({'user_id': self.dummy_user.id, 'title': 'Some title'})
+        self.assertEqual(False, form.is_valid())
+
+    def test_create_post_with_excerpt_but_no_content(self):
+        form = UserPostForm({'user_id': self.dummy_user.id, 'excerpt': 'Some text'})
+        self.assertEqual(False, form.is_valid())
+
+    def test_create_post_with_content_only(self):
+        form = UserPostForm({'user_id': self.dummy_user.id, 'content': 'Some text'})
+        self.assertEqual(True, form.is_valid())
+
+    def test_create_post_with_thumbnail_only(self):
+        form = UserPostForm({'user_id': self.dummy_user.id, 'thumbnail': self.dummy_image})
+        self.assertEqual(True, form.is_valid())
