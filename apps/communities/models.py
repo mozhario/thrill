@@ -5,6 +5,7 @@ from apps.base.models import Timestamps
 from apps.base.models import Post
 from apps.users.models import User, UserSubscription
 
+
 class Community(Timestamps):
     title = models.CharField(max_length=140)
     short_link = models.CharField(max_length=40, null=True, blank=True) # TODO validate as username (maybe property)

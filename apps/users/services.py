@@ -5,7 +5,6 @@ from actstream.actions import follow, unfollow
 from . import tasks
 
 
-
 class BaseUserSubscriptionManager():
     @staticmethod
     def _update_user_subscribed_to_cache(user):

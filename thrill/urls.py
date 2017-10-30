@@ -25,7 +25,6 @@ from apps.admin_site.admin import admin_site
 from apps.base.views import Trending
 
 
-
 urlpatterns = [
     url(r'^admin/', admin_site.urls),
 
