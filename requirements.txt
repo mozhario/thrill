@@ -8,12 +8,12 @@ confusable-homoglyphs==2.0.2
 constantly==15.1.0
 Django==1.11.6
 django-activity-stream==0.6.4
+django-autofixture==0.12.1
 django-debug-toolbar==1.8
-django-faker==0.2
 django-mptt==0.8.7
 django-redis==4.8.0
 django-registration==2.3
-fake-factory==9999.9.9
+djangorestframework==3.7.1
 Faker==0.8.6
 hyperlink==17.3.1
 incremental==17.5.0
