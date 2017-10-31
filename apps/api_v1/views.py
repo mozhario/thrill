@@ -7,13 +7,14 @@ from apps.users.models import User, UserPost
 from apps.communities.models import  Community, CommunityPost
 from django.contrib.auth.models import Group
 from . import serializers
+from .permissions import IsMeOrReadOnly
 
 
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsMeOrReadOnly,)
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = serializers.UserSerializer
 
