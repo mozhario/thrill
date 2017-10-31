@@ -21,3 +21,19 @@ class GroupSerializer(serializers.Serializer):
     class Meta:
         model = Group
         fields = ('url', 'name')
+
+
+class PostSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=140)
+    content = serializers.CharField(max_length=9999)
+    excerpt = serializers.CharField(max_length=300)
+    thumbnail = serializers.ImageField()
+    likes_count = serializers.IntegerField(default=0)
+
+
+class UserPostSerializer(PostSerializer):
+    user_id = serializers.IntegerField()
+
+
+class CommunityPostSerializer(PostSerializer):
+    community_id = serializers.IntegerField()

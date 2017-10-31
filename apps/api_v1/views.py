@@ -3,9 +3,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
 
-from apps.users.models import User
+from apps.users.models import User, UserPost
+from apps.communities.models import  Community, CommunityPost
 from django.contrib.auth.models import Group
-from .serializers import UserSerializer, GroupSerializer
+from . import serializers
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -14,7 +15,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+    serializer_class = serializers.UserSerializer
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -22,7 +23,17 @@ class GroupViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+    serializer_class = serializers.GroupSerializer
+
+
+class UserPostViewSet(viewsets.ModelViewSet):
+    queryset = UserPost.objects.all()
+    serializer_class = serializers.UserPostSerializer
+
+
+class CommunityPostViewSet(viewsets.ModelViewSet):
+    queryset = CommunityPost.objects.all()
+    serializer_class = serializers.CommunityPostSerializer
 
 
 class SomeAuthProtectedView(APIView):
