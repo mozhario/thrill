@@ -3,9 +3,14 @@
 {% block "user_tab" %}
 
     <div id="subscribed_communities" class="tab-content">
-        {% with communities=user.subscribed_to_communities %}
-            {% include "communities/partials/community_list.html" %}
-        {% endwith %}
+        {% if user.subscribed_to_communities %}
+            {% with communities=user.subscribed_to_communities %}
+                {% include "communities/partials/community_list.html" %}
+            {% endwith %}
+        {% else %}
+            <span class="section-placeholder no-data">{{ user.username }} is not subscribed to any communities yet.</span>
+        {% endif %}
+
     </div>
 
 {% endblock %}

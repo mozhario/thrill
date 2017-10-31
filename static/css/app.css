@@ -459,3 +459,14 @@ img {
 .tab-content {
     padding-top: 20px;
 }
+
+.section-placeholder {
+    color: #dedede;
+    font-size: 28px;
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    text-shadow: 1px 1px 0px rgba(0, 0, 20, 0.35);
+}

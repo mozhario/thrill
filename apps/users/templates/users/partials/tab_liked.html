@@ -2,9 +2,14 @@
 
 {% block "user_tab" %}
     <div id="liked" class="tab-content">
-        {% with posts_list=user.liked_posts %}
-              {% include "posts/partials/post_list.html" %}
-        {% endwith %}
+        {% if user.liked_posts %}
+            {% with posts_list=user.liked_posts %}
+                  {% include "posts/partials/post_list.html" %}
+            {% endwith %}
+        {% else %}
+            <span class="section-placeholder no-data">{{ user.username }} haven't liked anything yet.</span>
+        {% endif %}
+
     </div>
 
 {% endblock %}

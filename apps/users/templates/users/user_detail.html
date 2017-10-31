@@ -98,9 +98,13 @@
                     <div id="board" class="tab-content show">
                         <div class="board user-board">
                             <div class="posts-grid">
-                                {% with posts_list=user.userpost_set.all %}
-                                    {% include "posts/partials/post_list.html" %}
-                                {% endwith %}
+                                {% if user.userpost_set.all %}
+                                    {% with posts_list=user.userpost_set.all %}
+                                        {% include "posts/partials/post_list.html" %}
+                                    {% endwith %}
+                                {% else %}
+                                    <span class="section-placeholder no-data">No posts here yet...</span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
