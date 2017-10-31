@@ -4,6 +4,7 @@ import unittest
 from django.test import TestCase
 from django.core.files import File
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.urlresolvers import reverse
 
 from .models import User, UserPost
 from .forms import UserPostForm
@@ -44,4 +45,27 @@ class UserPostFormTestCase(TestCase):
     @unittest.skip("Dummy image object need to be fixed")
     def test_create_post_with_thumbnail_only(self):
         form = UserPostForm({'user_id': self.dummy_user.id, 'thumbnail': self.dummy_image})
+        # import pudb; pudb.set_trace()
         self.assertEqual(True, form.is_valid())
+
+
+class PostCreateViewTest(TestCase):
+    def setUp(self):
+        self.dummy_user = User.objects.create(
+            first_name='John',
+            last_name='Doe',
+            username='dummyuser',
+            email='dummy@ma.il',
+        )
+        self.dummy_user.set_password('dummypass')
+        self.dummy_user.save()
+
+    def test_call_view_denies_anonymous(self):
+        response = self.client.get(reverse('user_post_create'), follow=True)
+        self.assertRedirects(response, "%s?next=%s" % (reverse('auth_login'), reverse('user_post_create')) )
+
+    def test_call_view_accepts_logged_user(self):
+        print(self.client.login(username='dummyuser', password='dummypass'))
+        response = self.client.get(reverse('user_post_create'))
+        print(response)
+        self.assertEqual(response.status_code, 200)
