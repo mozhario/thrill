@@ -65,7 +65,33 @@ class PostCreateViewTest(TestCase):
         self.assertRedirects(response, "%s?next=%s" % (reverse('auth_login'), reverse('user_post_create')) )
 
     def test_call_view_accepts_logged_user(self):
-        print(self.client.login(username='dummyuser', password='dummypass'))
+        self.client.login(username='dummyuser', password='dummypass')
         response = self.client.get(reverse('user_post_create'))
-        print(response)
         self.assertEqual(response.status_code, 200)
+
+
+class UserDetailViewTestCase(TestCase):
+    def setUp(self):
+        self.dummy_user = User.objects.create(
+            first_name='John',
+            last_name='Doe',
+            username='dummyuser',
+            email='dummy@ma.il',
+            password='dummypass'
+        )
+
+    def test_user_empty_posts_board(self):
+        """
+        If user have no posts, there should be a message that tells "no posts" or something.
+        """
+        response = self.client.get(reverse('user_detail', args=[self.dummy_user.username]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'section-placeholder')
+        self.assertNotContains(response, 'entities-list')
+
+    def test_user_not_empty_posts_board(self):
+        UserPost.objects.create(content='sdfsdfsdfsdf', user=self.dummy_user)
+        response = self.client.get(reverse('user_detail', args=[self.dummy_user.username]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'entities-list')
+        self.assertNotContains(response, 'section-placeholder')
