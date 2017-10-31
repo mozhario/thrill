@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from apps.users.models import User
 from django.contrib.auth.models import Group
 
