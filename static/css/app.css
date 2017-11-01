@@ -61,23 +61,44 @@ img {
 .sidebar {
     display: none;
     position: fixed;
-    width: 200px;
+    width: 240px;
     height: 100%;
     right: 0;
     top: 40px;
     /*background: #eee;*/
-    padding: 10px;
-    border-left: 1px solid #ddd;
+    padding: 10px 40px 10px 10px;
+    /*border-left: 1px solid #ddd;*/
     box-sizing: border-box;
 }
 
 @media(min-width: 800px) {
     .main {
-        margin-right: 200px;
+        margin-right: 240px;
     }
     .sidebar {
+        padding-top: 60px;
         display: block;
     }
+}
+
+.sidebar-section {
+    margin-bottom: 16px;
+}
+
+.side-nav {
+
+}
+.side-nav-item {
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 2px;
+    color: #151515;
+}
+.side-nav-item:hover {
+    background-color: #d2485a;
+    color: white;
 }
 
 .grid {
