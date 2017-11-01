@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.users.models import User, UserPost
+from apps.users.models import User, UserSubscription, UserPost
 from apps.communities.models import Community, CommunityPost
 from django.contrib.auth.models import Group
 
@@ -9,6 +9,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+
+
+class UserSubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserSubscription
+        filds = '__all__'
 
 
 class GroupSerializer(serializers.ModelSerializer):
