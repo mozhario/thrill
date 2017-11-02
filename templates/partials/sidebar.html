@@ -12,9 +12,20 @@
                 <a class="side-nav-item" href="{% url 'messages' %}">Messages</a>
             </div>
         </div>
+
+        <div class="sidebar-section">
+            <a href="{% url 'auth_logout' %}">logout</a>
+        </div>
     </div>
 
     [ads here]
 {% else %}
-    {# login form here #}   
+    <div class="sidebar-box">
+        <div class="sidebar-section">
+            Hello, anon
+            <div>
+                <a href="{% url 'auth_login' %}">Login</a>
+            </div>
+        </div>
+    </div>
 {% endif %}
