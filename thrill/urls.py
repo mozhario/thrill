@@ -31,6 +31,8 @@ urlpatterns = [
     # Registration (django-registration)
     url(r'^accounts/register/$', UserRegistrationView.as_view(), name='registration_register'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
+    # Social auth
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
 
     url(r'', include('apps.users.urls')),
     url(r'', include('apps.communities.urls')),
