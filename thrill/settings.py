@@ -110,6 +110,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -119,6 +120,25 @@ SOCIAL_AUTH_GITHUB_SECRET = '0b88913853f2345857844dc6dd9cc19c0e925c48'
 
 SOCIAL_AUTH_TWITTER_KEY = 'GYrAvVdZADubgtUpKHq2vfWJj'
 SOCIAL_AUTH_TWITTER_SECRET = '3hZE2O4H85wp1xZF0HvE4z98rXoeWw3cve9goEcljpeDCVlIUS'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '547652598917458'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'bf46ef6d749ce1a4b29f381a82ccf71c'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '439850292471-thkborjanuhmtm4c5abvri1g42ic07go.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '81twc0KAyhASGX84B8EUji_Q'
+
+# from social_core.pipeline.social_auth import as
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+
+    'apps.users.auth_pipelines.get_user_avatar',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
