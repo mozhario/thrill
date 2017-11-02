@@ -117,6 +117,9 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_GITHUB_KEY = '0c591346f15001b62a9f'
 SOCIAL_AUTH_GITHUB_SECRET = '0b88913853f2345857844dc6dd9cc19c0e925c48'
 
+SOCIAL_AUTH_TWITTER_KEY = 'GYrAvVdZADubgtUpKHq2vfWJj'
+SOCIAL_AUTH_TWITTER_SECRET = '3hZE2O4H85wp1xZF0HvE4z98rXoeWw3cve9goEcljpeDCVlIUS'
+
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
