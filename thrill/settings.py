@@ -25,7 +25,10 @@ SECRET_KEY = 'h4f$qi_i=pqt185l*g%6!vtg*^&=176=v9j79pp_w96ihyio*m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'thrill.dummy',
+]
 
 
 # Application definition
@@ -91,6 +94,25 @@ TEMPLATES = [
         },
     },
 ]
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(BASE_DIR, 'debug.log'),
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
 
 WSGI_APPLICATION = 'thrill.wsgi.application'
 
@@ -177,7 +199,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
